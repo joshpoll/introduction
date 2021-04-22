@@ -1,8 +1,9 @@
 # Table of contents
 
 * [Home Page](README.md)
-* [Tutorial 1](tutorial-1.md)
-* [Tutorial 2](tutorial-2.md)
-* [Tutorial 3](tutorial-3.md)
+* [Tutorial 1: Basics](tutorial-1.md)
+* [Tutorial 2: Predicates](tutorial-2.md)
+* [Tutorial 3: Functions](tutorial-3.md)
+* [Tutorial 4: Writing Constraints & Objectives](tutorial-4-writing-constraints-and-objectives.md)
 * [Embed Testing](embed-testing.md)
 

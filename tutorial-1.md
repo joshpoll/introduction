@@ -2,7 +2,7 @@
 description: Basics
 ---
 
-# Tutorial 1
+# Tutorial 1: Basics
 
 This is the first diagram we will make together. This is the equivalent of the `print("Hello World")` program for Penrose. To make any mathematical diagram, we first need to be able to put down some **shapes** we want. In this tutorial, we will learn about how to build a triple \(`.dsl`, `.sub`, `.sty`\) for a simple diagram of two circles.
 

@@ -2,7 +2,7 @@
 description: Functions
 ---
 
-# Tutorial 3
+# Tutorial 3: Functions
 
 So far, we've directly declared substances in our diagram, which can then have some relationship with other substances in the diagram by the use of predicates.
 
