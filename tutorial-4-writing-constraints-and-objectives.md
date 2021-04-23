@@ -20,21 +20,31 @@ So now, how exactly do we write it?
 
 ### 1. Autodiff functions
 
-We enter this new world without our normal numbers and operations such as `+`  and `-`. Instead of what we normally can do across different languages such as javascript, python or c, we now have to use special number types and operations. 
+We enter this new world without our normal operations such as `+`  and `-`. Instead of what we normally can do across different languages such as javascript, python or c, we now have to use special number types and operations. 
 
 But no worries, it's straightforward. We have unary, binary, trinary, n-ary, and composite operations. The list of autodiff functions can be found [here](https://github.com/penrose/penrose/wiki/Autodiff-guide#to-use-the-autodiff). For example, instead of `a + b`, we now do `add(a, b)`. 
 
 ### 2. Special Number Types
 
-All numbers need to actually be special types called `VarAD`s that have special ops applied to them, so the system can track what operations are being applied to what. We convert to and from `number` and `VarAD` using the convenience functions `varOf` \(or `constOf`\) and `numOf`. You can also apply atomic and composite operations to `VarAD`s as described in the autodiff functions. Beyond that, you should not directly modify the `VarAD`s.
+All numbers need to actually be special types called `VarAD`  to be valid inputs for the autodiff functions. We can convert to and from normal numbers and `VarAD` using the functions `varOf: number -> VarAD` and `constOf: number -> VarAD` , and `numOf: VarAD -> number`, where the type `number` is our common const number values like `1, 2, 3, ...`.
 
-In the system, all arguments to objectives/constraints/functions are \(should be\) automatically converted to `VarAD`s, though if not, you can use the `constOfIf` function.
+For example, if we need to do `5 + 3` , the equivalent autodiff expression is `add(constOf(5), constOf(3))` or `add(varOf(5), varOf(5))`. 
 
 ### 3. Write functional code
 
 We must write these functions in _straight-line functional style_ \(i.e. no imperative style, no mutating state, no for-loops or if statements\). These restrictions are so the Penrose system can work its magic. Therefore we need to avoid writing things like `x = x + 1`  which translates to `let x = add(x, constOf(1))`  in autodiff code, and instead use constant intermediate variables like this: `const x0 = ... const x1 = add(x0, constOf(1))`. 
 
 ## Constraints Example: minSize & maxSize
+
+We will go through examples of `minSize` and `maxSize` constraints that are specifically for _**circles only**_. 
+
+```text
+minSize: ([shapeType, props]: [string, any]) => {
+    const limit = 20;
+    return sub(constOf(limit), props.r.contents);
+}
+
+```
 
 ## Constraints Example: canvas containment
 
