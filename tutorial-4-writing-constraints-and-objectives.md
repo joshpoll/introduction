@@ -17,9 +17,13 @@ We will start with understanding what, and how are constraints and objectives do
 * what is optimization, energy 
 * shifting from using the system versus writing a new part of the system 
 * constraint examples of math only 
-* how do you make one circle contained in another? \(math only\) 
+* how do you make one circle contained in another? \(math only\)  
 
-## Overview: How We Write Constraints
+## Conceptual: How We Form Constraints?
+
+have a set contained in another set, and both sets are circles
+
+## Concrete: How We Write Constraints
 
 With our Penrose triple, the syntax is most likely familiar to you from your prior programming experiences, but with constraints, we will be writing code in a particular way that allows Penrose to use a particular technique called **automatic differentiation,** _**autodiff**_ ****for short. The Penrose system uses autodiff to find the optimized diagram. Essentially, we need to write constraints and objectives in a specific way in order for Penrose to do its magic. For more on autodiff, read [here](https://github.com/penrose/penrose/wiki/Autodiff-guide#introduction). 
 
