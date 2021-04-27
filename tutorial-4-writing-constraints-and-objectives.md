@@ -6,9 +6,6 @@ description: Writing Constraints & Objectives
 
 ## Introduction
 
-* who is the tutorial for 
-  * advanced 
-
 We've been using constraints and objectives in our previous tutorials, and now we will begin writing our own constraints and objectives! Being able to write your own constraints and objectives is an important step in becoming an **advanced Penrose developer**. 
 
 You can for sure create beautiful diagrams with what you have already learned from the previous tutorials as _an user of the Penrose system_, whereas with the knowledge from this tutorial, you will be _extending the existing Penrose system_, producing tools other people can use as well. Therefore, read on if you want to understand the system side inner-workings of Penrose. 
