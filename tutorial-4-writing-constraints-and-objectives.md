@@ -10,7 +10,7 @@ We've been using constraints and objectives in our previous tutorials, and now w
 
 You can for sure create beautiful diagrams with what you have already learned from the previous tutorials as _an user of the Penrose system_, whereas with the knowledge from this tutorial, you will be _extending the existing Penrose system_, producing tools other people can use as well. Therefore, read on if you want to understand the system side inner-workings of Penrose. 
 
-We will start with understanding how are constraints and objectives done in Penrose, and then we will go through several examples line by line to apply our conceptual understanding concretely. 
+We will start with understanding what, and how are constraints and objectives done in Penrose, and then we will go through several examples line by line to apply our conceptual understanding concretely. 
 
 ## What is a constraint?
 
