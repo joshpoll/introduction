@@ -146,7 +146,7 @@ $$
 
 ## TO-DO: Exercises
 
-* Writing the circle functions for rectangles? 
+* make 2 circles disjoint, then disjoint with padding
 
 Reference: [https://github.com/penrose/penrose/wiki/Getting-started\#writing-new-objectivesconstraintscomputations](https://github.com/penrose/penrose/wiki/Getting-started#writing-new-objectivesconstraintscomputations)
 
