@@ -80,7 +80,7 @@ Since we penalize the amount the constraint is greater than `0`. So, this constr
 
 ### 5. Accessing Shape Field Value
 
- One common operation is to access the parameter of the shape, which is done via `shapeName.propertyName.contents`, which will return a `VarAD`.  For example, if you had a circle `c` as input, and you want its radius, doing `c.r.contents` will give you something like `5.0` \(wrapped in a `VarAD`\).
+One common operation is to access the parameter of the shape, which is done via `shapeName.propertyName.contents`, which will return a `VarAD`.  For example, if you had a circle `c` as input, and you want its radius, doing `c.r.contents` will give you something like `5.0` \(wrapped in a `VarAD`\).
 
 ## Constraints Example: minSize & maxSize
 
@@ -93,7 +93,13 @@ minSize: ([shapeType, props]: [string, any]) => {
 }
 ```
 
-insert description
+Here we see several things in play. 
+
+* The function takes in the shape, which is represented by a string of its shape name, which would be `"Circle"` in this case, and a `prop` of type `any` , which contains the props of the shape. 
+* Instead of directly using constant numbers `20`, we have to use `constOf(limit)` in order to pass it as a valid input for the autodiff function.
+* Instead of using the subtraction operator `-` like we normally do, we have to use the autodiff function `sub` .
+* We access the shape's property value by `shapeName.propertyName.contents` , where we have `propertyName = r` for radius. 
+* We want the input circle to have a minimum size as the function name suggests. If our circle has \`
 
 ```text
 maxSize: ([shapeType, props]: [string, any]) => {
