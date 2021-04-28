@@ -16,7 +16,31 @@ We will start with understanding what, and how are constraints and objectives do
 
 ## Conceptual: How We Form Constraints?
 
-have a set contained in another set, and both sets are circles
+In the normal world, when we want a circle A contained in another circle B, this is normally what comes into our mind:
+
+\[ insert circle containment \]
+
+But let's pause for a second, and _really_ think about what does it meant for a circle to be contained in another circle mathematically? 
+
+There are generally 3 scenarios for the containment relationship between 2 circles. 
+
+\[ insert 3 scenarios \]
+
+We have completely not contained, partially contained, and completely contained. It is visually obvious to any of us. We get showed 2 circles, and in a split second, we can identify their containment relationship. Unfortunately, Penrose does not have eyes,  but good news is, it speaks math! Therefore, let's take a new look at these circles.
+
+\[ insert 3 scenarios with radius \]
+
+Recall the general equation for a circle where \( h, k \) is the center and r is the radius. 
+
+$$
+(x - h )^2 + ( y - k )^2 = r^2
+$$
+
+The center coordinate and radius are the information we have about **any** circle, and we will use these information to determine two circle's containment relationship. We begin with getting the distance between the circles' centers. 
+
+\[insert distance\]
+
+Notice how the distance is progressively smaller as A is more and more contained in B as expected. So a potentially working but not very good energy function would be returning the distance between the centers. We will take a step further and subtract the difference between A and B's radii,  `B-A` from the distance `d`.
 
 ## Concrete: How We Write Constraints
 
@@ -52,7 +76,7 @@ Since we penalize the amount the constraint is greater than `0`. So, this constr
 
 * Let's say I want the constraint `f(x) <= c` to be true.
 * I translate it to the zero-based inequality `f(x) - c <= 0`.
-* I translate the inequality constraint into an energy \(penalty\) `E(x) = f(x) - c` — it is greater than `0` iff the constraint is violated, and the more the constraint is violated, the higher the energy is \(e.g. if `f(x)` is way bigger than `c` then the energy is a lot bigger than `0`\). **That is the form of all the constraints in the system \(and the form you'll be writing them in\).** 
+* I translate the inequality constraint into an energy \(penalty\) `E(x) = f(x) - c` — it is greater than `0` iff the constraint is violated, and the more the constraint is violated, the higher the energy is \(e.g. if `f(x)` is way bigger than `c` then the energy is a lot bigger than `0`\). 
 
 ## Constraints Example: minSize & maxSize
 
