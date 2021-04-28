@@ -12,7 +12,9 @@ You are already equipped to create beautiful diagrams with what you have already
 
 We will start with understanding what, and how are constraints and objectives done in Penrose, and then we will go through several examples line by line to apply our conceptual understanding concretely. 
 
-## TO-DO: What is optimization / energy function? What is a constraint? 
+## TO-DO: What is optimization / energy function? What is a constraint?
+
+try watching keenan lecture + screenshot slides to write this section  
 
 Things that need to be introduced here \(used later\)
 
