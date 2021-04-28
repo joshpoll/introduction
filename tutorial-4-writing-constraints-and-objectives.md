@@ -35,10 +35,10 @@ We have completely contained, overlapping but not contained, and completely disj
 
 **\[ change diagram to have labels with vector notation, i.e. c\_a and c\_b for center of a and b\]** 
 
-Recall the general equation for a circle where \( h, k \) is the center and r is the radius. 
+Recall the general equation for a circle where p is some point, c is the center and r is the radius. 
 
 $$
-(x - h )^2 + ( y - k )^2 = r^2
+||p-c|| < r
 $$
 
 The center coordinate and radius are the information we have about **any** circle, and we will use these information to determine two circle's containment relationship. We begin with getting the distance between the circles' centers. 
