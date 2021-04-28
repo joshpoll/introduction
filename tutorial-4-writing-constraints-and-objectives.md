@@ -8,11 +8,16 @@ description: Writing Constraints & Objectives
 
 We've been using constraints and objectives in our previous tutorials, and now we will begin writing our own constraints and objectives! Being able to write your own constraints and objectives is an important step in becoming an **advanced Penrose developer**. 
 
-You can for sure create beautiful diagrams with what you have already learned from the previous tutorials as _an user of the Penrose system_, whereas with the knowledge from this tutorial, you will be _extending the existing Penrose system_, producing tools other people can use as well. Therefore, read on if you want to understand the system side inner-workings of Penrose. 
+You are already equipped to create beautiful diagrams with what you have already learned from the previous tutorials as _an user of the Penrose system_, whereas with the knowledge from this tutorial, you will be _extending the existing Penrose system_, contributing to the platform for many other users. 
 
 We will start with understanding what, and how are constraints and objectives done in Penrose, and then we will go through several examples line by line to apply our conceptual understanding concretely. 
 
-## TO\_DO: What is optimization / energy function? What is a constraint? 
+## TO-DO: What is optimization / energy function? What is a constraint? 
+
+Things that need to be introduced here \(used later\)
+
+* penalty, energy function 
+* multiplying by weight \(for `repel`\)
 
 ## Conceptual: How To Come Up With Constraints?
 
@@ -52,7 +57,7 @@ So now, how exactly do we write it?
 
 We enter this new world without our normal operations such as `+`  and `-`. Instead of what we normally can do across different languages such as javascript, python or c, we now have to use special number types and operations. 
 
-But no worries, it's straightforward. We have unary, binary, trinary, n-ary, and composite operations. The list of autodiff functions can be found [here](https://github.com/penrose/penrose/wiki/Autodiff-guide#to-use-the-autodiff). For example, instead of `a + b`, we now do `add(a, b)`. 
+But no worries, it's straightforward. We have unary, binary, trinary, n-ary, and composite operations. The list of autodiff functions can be found [here](https://github.com/penrose/penrose/wiki/Autodiff-guide#to-use-the-autodiff). For example, instead of `a + b`, we now do `add(a, b)`.  The composite operations are accessed through `ops.functionName`.
 
 ### 2. Special Number Types
 
@@ -64,7 +69,7 @@ For example, if we need to do `5 + 3` , the equivalent autodiff expression is `a
 
 We must write these functions in _straight-line functional style_ \(i.e. no imperative style, no mutating state, no for-loops or if statements\). These restrictions are so the Penrose system can work its magic. Therefore we need to avoid writing things like `x = x + 1`  which translates to `let x = add(x, constOf(1))`  in autodiff code, and instead use constant intermediate variables like this: `const x0 = ... const x1 = add(x0, constOf(1))`. 
 
-### 4. Zero-based inequality to penalty 
+### 4. Zero-based inequality to penalty \(will be edited down according to how the definition section goes\)
 
 For every constraint function we write, we take in shapes and output a number or a tensor as penalty. In short, Penrose will try to minimize the outputs of all the constraint functions used for the diagram. 
 
@@ -98,7 +103,7 @@ Here we see several things in play.
 * **Input:** The function takes in the shape, which is represented by a string of its shape name, which would be `"Circle"` in this case, and a `prop` which contains the properties of the circle. 
 * **Numbers:** Instead of directly using constant numbers `20`, we have to use `constOf(limit)` in order to pass it as a valid input for the autodiff function.
 * **Operations:** Instead of using the subtraction operator `-` like we normally do, we have to use the autodiff function `sub` .
-* **Syntax**: We access the shape's property value by `shapeName.propertyName.contents` , where we have `propertyName = r` for radius. 
+* **Accessing Shape Property:** We access the shape's property value by `shapeName.propertyName.contents` , where we have `propertyName = r` for radius. 
 * **Logic:** We want the input circle to have a minimum size as the function name suggests, and remember with these functions, and we want to minimize whatever value we return. For example, with a bad small circle with a radius of 1, we will return 19, whereas with a good big circle with a radius of 30, we will return -10, which is much smaller, thus meaning it's good. 
 
 ```text
@@ -114,7 +119,28 @@ The function `maxSize` is very similar to `minSize` plus using a global variable
 
 ## Objectives Example: circle repel
 
-## Exercises
+With objectives, we want them to output the "badness" of the inputs \(as a number or Tensor\), and have local minima where we want the solution to be.
+
+Now we look at an objective that makes two circles repel, i.e. encouraging the two circles to be far apart from each other. 
+
+```text
+repel: ([t1, s1]: [string, any], [t2, s2]: [string, any],
+                                       weight = 10.0) => {
+    const repelWeight = 10e6;
+    let res = inverse(ops.vdistsq(s1.center.contents, s2.center.contents));
+    return mul(res, constOf(repelWeight));
+}
+```
+
+We will look at this code together step by step,
+
+* **Input:** The function takes in similar inputs as the constraint functions we've just looked at, where for convenience, instead of `shapeType` we are simply using `t`. For the last input `weight`, `repel` typically needs to have a weight multiplied since its magnitude is small. 
+* **Operations:** Here we use 3 autodiff functions, `inverse`, `mul`, and `ops.vdistsq.`The `mul` function does multiplication,  `inverse(v)` function returns `1 / v` and `ops.vdistsq(v, w)` returns the Euclidean distance squared between vectors `v` and `w`. Remember `ops` is for composite functions that work on vectors. 
+* **Logic:** 
+
+## TO-DO: Exercises
+
+* Writing the circle functions for rectangles? 
 
 Reference: [https://github.com/penrose/penrose/wiki/Getting-started\#writing-new-objectivesconstraintscomputations](https://github.com/penrose/penrose/wiki/Getting-started#writing-new-objectivesconstraintscomputations)
 
