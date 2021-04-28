@@ -20,7 +20,7 @@ Ready to make some beautiful diagrams? Penrose is accessible for people with a v
 * [Part 1: Make Your First Diagram](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial-p1.md)
   * [Tutorial](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial-p1.md#part-1-penrose-basics)
   * [Exercise](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial-p1.md#exercise)
-* [Part 2: Predicates & Contraints](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial-p2.md)
+* [Part 2: Predicates & Constraints](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial-p2.md)
   * [Tutorial](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial-p2.md#part-2-predicates--constraints)
   * [Exercise](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial-p2.md#exercise)
 * [Part 3: Functions](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial-p3.md)
@@ -89,9 +89,14 @@ Now, you are equipped to embark on your Penrose journey to make your first penro
 ### Sneak peak of the tutorials
 
 * Tutorial 1: Diagram containing 2 sets
-  *   ![tutorial 1 goal](https://github.com/penrose/penrose/raw/docs-edit/assets/tutorial/part1/2sets_nolabel.png)
+
+![](.gitbook/assets/2sets_nolabel.png)
+
 * Tutorial 2: Diagram illustrating the concept of `subset`
-  *   ![tutorial 2 goal](https://github.com/penrose/penrose/blob/docs-edit/assets/tutorial/part2/goal.svg)
+
+![](.gitbook/assets/goal.svg)
+
 * Tutorial 3: Diagram showing vector addition
-  *   ![tutorial 3 goal](https://github.com/penrose/penrose/blob/docs-edit/assets/tutorial/part3/using/sum.jpeg)
+
+![](.gitbook/assets/addtion_wg.png)
 

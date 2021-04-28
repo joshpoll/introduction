@@ -21,19 +21,17 @@ Things that need to be introduced here \(used later\)
 
 ## Conceptual: How To Come Up With Constraints?
 
-In the normal world, when we want a circle A contained in another circle B, this is normally what comes into our mind:
-
-\[ insert circle containment \]
+In the normal world, when we want a circle A contained in another circle B, this is normally what comes into our mind.
 
 But let's pause for a second, and _really_ think about what does it meant for a circle to be contained in another circle mathematically? 
 
 There are generally 3 scenarios for the containment relationship between 2 circles. 
 
-\[ insert 3 scenarios \]
+![](.gitbook/assets/circles.png)
 
-We have completely not contained, partially contained, and completely contained. It is visually obvious to any of us. We get showed 2 circles, and in a split second, we can identify their containment relationship. Unfortunately, Penrose does not have eyes,  but good news is, it speaks math! Therefore, let's take a new look at these circles.
+We have completely contained, partially contained, and completely not contained. It is visually obvious to any of us. We get showed 2 circles, and in a split second, we can identify their containment relationship. Unfortunately, Penrose does not have eyes,  but good news is, it speaks math! Therefore, let's take a new look at these circles.
 
-\[ insert 3 scenarios with radius \]
+![](.gitbook/assets/w_cent_rad.png)
 
 Recall the general equation for a circle where \( h, k \) is the center and r is the radius. 
 
