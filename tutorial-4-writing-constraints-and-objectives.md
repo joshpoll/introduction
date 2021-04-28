@@ -138,6 +138,12 @@ We will look at this code together step by step,
 * **Operations:** Here we use 3 autodiff functions, `inverse`, `mul`, and `ops.vdistsq.`The `mul` function does multiplication,  `inverse(v)` function returns `1 / v` and `ops.vdistsq(v, w)` returns the Euclidean distance squared between vectors `v` and `w`. Remember `ops` is for composite functions that work on vectors. 
 * **Logic:** 
 
+Show diagram of 1/x^2, we are plugging in the distance between the circles. The smaller `d` is, the greater the output is 
+
+$$
+\frac{1}{||C_A - C_B||^2 } = \frac{1}{d^2}
+$$
+
 ## TO-DO: Exercises
 
 * Writing the circle functions for rectangles? 
