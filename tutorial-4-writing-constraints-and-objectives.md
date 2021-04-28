@@ -14,7 +14,7 @@ We will start with understanding what, and how are constraints and objectives do
 
 ## TO\_DO: What is optimization / energy function? What is a constraint? 
 
-## Conceptual: How We Form Constraints?
+## Conceptual: How To Come Up With Constraints?
 
 In the normal world, when we want a circle A contained in another circle B, this is normally what comes into our mind:
 
@@ -78,6 +78,10 @@ Since we penalize the amount the constraint is greater than `0`. So, this constr
 * I translate it to the zero-based inequality `f(x) - c <= 0`.
 * I translate the inequality constraint into an energy \(penalty\) `E(x) = f(x) - c` — it is greater than `0` iff the constraint is violated, and the more the constraint is violated, the higher the energy is \(e.g. if `f(x)` is way bigger than `c` then the energy is a lot bigger than `0`\). 
 
+### 5. Accessing Shape Field Value
+
+ One common operation is to access the parameter of the shape, which is done via `shapeName.propertyName.contents`, which will return a `VarAD`.  For example, if you had a circle `c` as input, and you want its radius, doing `c.r.contents` will give you something like `5.0` \(wrapped in a `VarAD`\).
+
 ## Constraints Example: minSize & maxSize
 
 We will go through examples of `minSize` and `maxSize` constraints that are specifically for _**circles only**_. 
@@ -105,4 +109,6 @@ insert description
 ## Objectives Example: circle repel
 
 ## Exercises
+
+Reference: [https://github.com/penrose/penrose/wiki/Getting-started\#writing-new-objectivesconstraintscomputations](https://github.com/penrose/penrose/wiki/Getting-started#writing-new-objectivesconstraintscomputations)
 
