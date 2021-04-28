@@ -107,9 +107,17 @@ Now, you understand the differences between and usage of the `.dsl`, `.sub` and 
 
 _Since we are not defining all the properties that control how the shape will look on screen \(location, color, etc\), Penrose will optimize and make those decisions for you. Therefore when you click the resample button, you will get a new diagram that might have varying appearances, and here we've provided some sample results of the same Penrose program. So do not worry if your diagram does not look the exact same as ours._
 
-* **Challenge 1:** Add another `Set` to the diagram. [![challenge 1 result](https://github.com/penrose/penrose/raw/docs-edit/assets/tutorial/part1/tutorial1c1.png)](https://github.com/penrose/penrose/blob/docs-edit/assets/tutorial/part1/tutorial1c1.png)
-* **Challenge 2:** Keep 3 sets. Represent `Set` as squares with `side` equal to `50.0`. [![challenge 2 result](https://github.com/penrose/penrose/raw/docs-edit/assets/tutorial/part1/tutorial1c2.png)](https://github.com/penrose/penrose/blob/docs-edit/assets/tutorial/part1/tutorial1c2.png)
-* **Challenge 3:** Keep 3 sets. Represent `Set` as rectangles with `strokeWidth` equal to 15. [![challenge 3 result](https://github.com/penrose/penrose/raw/docs-edit/assets/tutorial/part1/tutorial1c3.png)](https://github.com/penrose/penrose/blob/docs-edit/assets/tutorial/part1/tutorial1c3.png)
+* **Challenge 1:** Add another `Set` to the diagram.
+
+![](.gitbook/assets/tutorial1c1.png)
+
+* **Challenge 2:** Keep 3 sets. Represent `Set` as squares with `side` equal to `50.0`.
+
+![](.gitbook/assets/tutorial1c2.png)
+
+* **Challenge 3:** Keep 3 sets. Represent `Set` as rectangles with `strokeWidth` equal to 15.
+
+![](.gitbook/assets/tutorial1c3.png)
 
 After you are done, you can double check your work with [solutions](https://github.com/penrose/penrose/blob/docs-edit/tutorial/exercise1-sol.md).
 
