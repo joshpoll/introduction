@@ -21,7 +21,7 @@ Things that need to be introduced here \(used later\)
 
 ## Conceptual: How To Come Up With Constraints?
 
-In the normal world, when we want a circle A contained in another circle B, this is normally what comes into our mind.
+In the normal world, when we want a circle A contained in another circle B, this is normally what comes into our mind. **\[ add more on what this section is about \]**
 
 But let's pause for a second, and _really_ think about what does it meant for a circle to be contained in another circle mathematically? 
 
