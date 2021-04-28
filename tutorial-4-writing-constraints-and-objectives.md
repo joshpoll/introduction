@@ -99,7 +99,7 @@ Here we see several things in play.
 * Instead of directly using constant numbers `20`, we have to use `constOf(limit)` in order to pass it as a valid input for the autodiff function.
 * Instead of using the subtraction operator `-` like we normally do, we have to use the autodiff function `sub` .
 * We access the shape's property value by `shapeName.propertyName.contents` , where we have `propertyName = r` for radius. 
-* We want the input circle to have a minimum size as the function name suggests. If our circle has \`
+* We want the input circle to have a minimum size as the function name suggests, and remember with these functions, and we want to minimize whatever value we return. For example, with a bad small circle with a radius of 1, we will return 19, whereas with a good big circle with a radius of 30, we will return -10, which is much smaller, thus meaning it's good. 
 
 ```text
 maxSize: ([shapeType, props]: [string, any]) => {
