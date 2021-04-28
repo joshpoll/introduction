@@ -29,9 +29,11 @@ There are generally 3 scenarios for the containment relationship between 2 circl
 
 ![](.gitbook/assets/circles.png)
 
-We have completely contained, partially contained, and completely not contained. It is visually obvious to any of us. We get showed 2 circles, and in a split second, we can identify their containment relationship. Unfortunately, Penrose does not have eyes,  but good news is, it speaks math! Therefore, let's take a new look at these circles.
+We have completely contained, overlapping but not contained, and completely disjoint. It is visually obvious to any of us. We get showed 2 circles, and in a split second, we can identify their containment relationship. Unfortunately, Penrose does not have eyes,  but good news is, it speaks math! Therefore, let's take a new look at these circles.
 
 ![](.gitbook/assets/w_cent_rad.png)
+
+**\[ change diagram to have labels with vector notation, i.e. c\_a and c\_b for center of a and b\]** 
 
 Recall the general equation for a circle where \( h, k \) is the center and r is the radius. 
 
@@ -41,7 +43,7 @@ $$
 
 The center coordinate and radius are the information we have about **any** circle, and we will use these information to determine two circle's containment relationship. We begin with getting the distance between the circles' centers. 
 
-\[insert distance\]
+**\[ insert diagram with distance labeled \]**
 
 Notice how the distance is progressively smaller as A is more and more contained in B as expected. So a potentially working but not very good energy function would be returning the distance between the centers. We will take a step further and subtract the difference between A and B's radii,  `B-A` from the distance `d`.
 
