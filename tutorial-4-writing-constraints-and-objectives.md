@@ -95,22 +95,22 @@ minSize: ([shapeType, props]: [string, any]) => {
 
 Here we see several things in play. 
 
-* The function takes in the shape, which is represented by a string of its shape name, which would be `"Circle"` in this case, and a `prop` of type `any` , which contains the props of the shape. 
-* Instead of directly using constant numbers `20`, we have to use `constOf(limit)` in order to pass it as a valid input for the autodiff function.
-* Instead of using the subtraction operator `-` like we normally do, we have to use the autodiff function `sub` .
-* We access the shape's property value by `shapeName.propertyName.contents` , where we have `propertyName = r` for radius. 
-* We want the input circle to have a minimum size as the function name suggests, and remember with these functions, and we want to minimize whatever value we return. For example, with a bad small circle with a radius of 1, we will return 19, whereas with a good big circle with a radius of 30, we will return -10, which is much smaller, thus meaning it's good. 
+* **Input:** The function takes in the shape, which is represented by a string of its shape name, which would be `"Circle"` in this case, and a `prop` which contains the properties of the circle. 
+* **Numbers:** Instead of directly using constant numbers `20`, we have to use `constOf(limit)` in order to pass it as a valid input for the autodiff function.
+* **Operations:** Instead of using the subtraction operator `-` like we normally do, we have to use the autodiff function `sub` .
+* **Syntax**: We access the shape's property value by `shapeName.propertyName.contents` , where we have `propertyName = r` for radius. 
+* **Logic:** We want the input circle to have a minimum size as the function name suggests, and remember with these functions, and we want to minimize whatever value we return. For example, with a bad small circle with a radius of 1, we will return 19, whereas with a good big circle with a radius of 30, we will return -10, which is much smaller, thus meaning it's good. 
 
 ```text
+import { canvasSize } from "renderer/ShapeDef";
+
 maxSize: ([shapeType, props]: [string, any]) => {
     const limit = Math.max(...canvasSize);
     return sub(props.r.contents, constOf(limit / 6.0));
 }
 ```
 
-insert description
-
-## Constraints Example: canvas containment
+The function `maxSize` is very similar to `minSize` plus using a global variable `canvasSize` that is the size of the canvas, which we use as a limit of our circle's radius. It is divided by `6.0` as you can imagine, if we simply constraint the radius by `canvasSize`, we can have a circle with a radius of `canvasSize`, which can cover the entire canvas and we don't want that. You can feel free to play around with the amount you divide by, but `6.0` has proven to work pretty well. 
 
 ## Objectives Example: circle repel
 
