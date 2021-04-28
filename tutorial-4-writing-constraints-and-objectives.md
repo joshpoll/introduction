@@ -12,12 +12,7 @@ You can for sure create beautiful diagrams with what you have already learned fr
 
 We will start with understanding what, and how are constraints and objectives done in Penrose, and then we will go through several examples line by line to apply our conceptual understanding concretely. 
 
-## What is a constraint?
-
-* what is optimization, energy 
-* shifting from using the system versus writing a new part of the system 
-* constraint examples of math only 
-* how do you make one circle contained in another? \(math only\)  
+## TO\_DO: What is optimization / energy function? What is a constraint? 
 
 ## Conceptual: How We Form Constraints?
 
