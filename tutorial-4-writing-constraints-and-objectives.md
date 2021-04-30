@@ -19,35 +19,53 @@ try watching keenan lecture + screenshot slides to write this section
 Things that need to be introduced here \(used later\)
 
 * penalty, energy function 
-* multiplying by weight \(for `repel`\)
+* multiplying by weight \(for `repel`\) &lt;-- not necessary
 
 ## Conceptual: How To Come Up With Constraints?
 
-In the normal world, when we want a circle A contained in another circle B, this is normally what comes into our mind. **\[ add more on what this section is about \]**
+In the normal world, when we want a circle A contained in another circle B, this is normally what comes into our mind.
 
-But let's pause for a second, and _really_ think about what does it meant for a circle to be contained in another circle mathematically? 
+![](.gitbook/assets/mentalpicture.png)
+
+We have a mental picture of _containment_  means to us, but there is no way for us to transfer this mental picture directly to the Penrose system and say, "Okay this is what we want when we write  `isContained(A, B)`". Therefore we need to pause for a second, and really think about what does it meant for a circle to be contained in another circle mathematically. 
 
 There are generally 3 scenarios for the containment relationship between 2 circles. 
 
 ![](.gitbook/assets/circles.png)
 
-We have completely contained, overlapping but not contained, and completely disjoint. It is visually obvious to any of us. We get showed 2 circles, and in a split second, we can identify their containment relationship. Unfortunately, Penrose does not have eyes,  but good news is, it speaks math! Therefore, let's take a new look at these circles.
+We have completely **contained**, **overlapping** but not contained, and completely **disjoint**. Disjoint means none of the points in circle A is also in circle B, i.e. they do not overlap at all.
+
+The three scenarios are visually obvious to us. We get showed 2 circles, and in a split second, we can identify their relationship. Unfortunately, Penrose does not have eyes,  but good news is, _it speaks math!_ Therefore, let's take a new look at these circles.
 
 ![](.gitbook/assets/w_cent_rad.png)
 
 **\[ change diagram to have labels with vector notation, i.e. c\_a and c\_b for center of a and b\]** 
 
-Recall the general equation for a circle where p is some point, c is the center and r is the radius. 
+Recall the general equation for a circle where $$p$$ is some point, $$c$$ is the center and $$r$$ is the radius. This equation is in vector form since Penrose supports vectors and we prefer working with vectors instead of separate  $$x, y$$.
 
 $$
-||p-c|| < r
+||p-c|| = r
 $$
 
-The center coordinate and radius are the information we have about **any** circle, and we will use these information to determine two circle's containment relationship. We begin with getting the distance between the circles' centers. 
+The center coordinate and radius are the information we have about **any** circle, and we will use these information to determine two circle's containment relationship. 
 
-**\[ insert diagram with distance labeled \]**
+![](.gitbook/assets/distance.png)
 
-Notice how the distance is progressively smaller as A is more and more contained in B as expected. So a potentially working but not very good energy function would be returning the distance between the centers. We will take a step further and subtract the difference between A and B's radii,  `B-A` from the distance `d`.
+Another information we will be using is the distance $$d$$ between the radii. Notice how the distance is progressively smaller as $$A$$ is more and more contained in $$B$$ as expected. When $$A, B$$ are disjoint, we see that $$d$$'s value is the greatest. 
+
+As we've said earlier, when writing constraints, we want to translate everything to zero-based inequality. Now, think about the value:
+
+$$
+r_{difference} = r_B - r_A
+$$
+
+We know $$r_B - r_A < 0$$ when $$r_A > r_B$$, i.e. radius of the circle A \(that we want to be contained\) is greater than the radius of circle B, and in that case, **A cannot be contained by B**, and $$r_{difference} < 0$$.
+
+We have $$r_B - r_A = 0$$ when $$r_A = r_B$$, i.e. the radii of the two circles are equal, and they can be contained in each other if and only if distance $$d$$ 
+
+![](.gitbook/assets/finished.png)
+
+We then subtract the difference between A and B's radii,  `B-A` from the distance `d`.
 
 ## Concrete: How We Write Constraints
 
