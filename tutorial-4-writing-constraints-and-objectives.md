@@ -45,7 +45,7 @@ The center coordinate and radius are the information we have about **any** circl
 
 ![](.gitbook/assets/distance.png)
 
-Another information we will be using is the distance $$d$$ between the radii. Notice how the distance is progressively smaller as $$A$$ is more and more contained in $$B$$ as expected. When $$A, B$$ are disjoint, we see that $$d$$'s value is the greatest. 
+Another information we will be using is the distance $$d$$ between the radii. Notice how the distance is progressively bigger as $$A$$ and $$B$$ are more disjoint. When $$A, B$$ are disjoint, we see that $$d$$'s value is the greatest. 
 
 As we've said earlier, when writing constraints, we want to translate everything to zero-based inequality. Now, think about the value $$r_{difference}=r_B-r_A$$, which is the difference of radii between the circles. Using both $$r_{difference}$$ and $$d$$, we can determine whether if $$A$$ is contained in $$B$$. In particular, consider the value of $$d-r_{difference}$$.
 
@@ -101,7 +101,7 @@ One common operation is to access the parameter of the shape, which is done via 
 
 We will go through examples of `minSize` and `maxSize` constraints that are specifically for _**circles only**_. 
 
-```text
+```typescript
 minSize: ([shapeType, props]: [string, any]) => {
     const limit = 20;
     return sub(constOf(limit), props.r.contents);
