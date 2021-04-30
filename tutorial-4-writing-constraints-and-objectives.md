@@ -39,13 +39,7 @@ The three scenarios are visually obvious to us. We get showed 2 circles, and in 
 
 ![](.gitbook/assets/w_cent_rad.png)
 
-**\[ change diagram to have labels with vector notation, i.e. c\_a and c\_b for center of a and b\]** 
-
-Recall the general equation for a circle where $$p$$ is some point, $$c$$ is the center and $$r$$ is the radius. This equation is in vector form since Penrose supports vectors and we prefer working with vectors instead of separate  $$x, y$$.
-
-$$
-||p-c|| = r
-$$
+Recall the general equation for a circle where $$p$$ is some point, $$c$$ is the center and $$r$$ is the radius: $$||p-c||=r$$. This equation is in vector form since Penrose supports vectors and we prefer working with vectors instead of separate  $$x, y$$.
 
 The center coordinate and radius are the information we have about **any** circle, and we will use these information to determine two circle's containment relationship. 
 
@@ -53,19 +47,15 @@ The center coordinate and radius are the information we have about **any** circl
 
 Another information we will be using is the distance $$d$$ between the radii. Notice how the distance is progressively smaller as $$A$$ is more and more contained in $$B$$ as expected. When $$A, B$$ are disjoint, we see that $$d$$'s value is the greatest. 
 
-As we've said earlier, when writing constraints, we want to translate everything to zero-based inequality. Now, think about the value:
+As we've said earlier, when writing constraints, we want to translate everything to zero-based inequality. Now, think about the value $$r_{difference}=r_B-r_A$$, which is the difference of radii between the circles. Using both $$r_{difference}$$ and $$d$$, we can determine whether if $$A$$ is contained in $$B$$. In particular, consider the value of $$d-r_{difference}$$.
 
-$$
-r_{difference} = r_B - r_A
-$$
+We know $$r_{difference}$$ when $$r_A > r_B$$, i.e. radius of the circle A \(that we want to be contained\) is greater than the radius of circle B, and in that case, A cannot be contained by B. Then we have $$d-r_{difference}>d$$.
 
-We know $$r_B - r_A < 0$$ when $$r_A > r_B$$, i.e. radius of the circle A \(that we want to be contained\) is greater than the radius of circle B, and in that case, **A cannot be contained by B**, and $$r_{difference} < 0$$.
+We have $$r_{difference} = 0$$ when $$r_A = r_B$$, i.e. the radii of the two circles are equal, and they can be contained in each other if and only if distance $$d=r_B=r_A$$ , then $$d-r_{difference}=d$$.
 
-We have $$r_B - r_A = 0$$ when $$r_A = r_B$$, i.e. the radii of the two circles are equal, and they can be contained in each other if and only if distance $$d$$ 
+We have $$r_{difference}>0$$ when $$r_A < r_B$$, i.e. $$A$$ is a smaller circle than $$B$$. In that case $$A$$ is perfectly containable, and $$d-r_{difference} < d$$.
 
-![](.gitbook/assets/finished.png)
-
-We then subtract the difference between A and B's radii,  `B-A` from the distance `d`.
+As shown above, we can conclude that the more contained circle $$A$$ is inside circle $$B$$, the smaller the value of $$d-r_{difference}$$, and that is exactly what Penrose uses for our `contains` constraint. 
 
 ## Concrete: How We Write Constraints
 
@@ -156,17 +146,22 @@ We will look at this code together step by step,
 
 * **Input:** The function takes in similar inputs as the constraint functions we've just looked at, where for convenience, instead of `shapeType` we are simply using `t`. For the last input `weight`, `repel` typically needs to have a weight multiplied since its magnitude is small. 
 * **Operations:** Here we use 3 autodiff functions, `inverse`, `mul`, and `ops.vdistsq.`The `mul` function does multiplication,  `inverse(v)` function returns `1 / v` and `ops.vdistsq(v, w)` returns the Euclidean distance squared between vectors `v` and `w`. Remember `ops` is for composite functions that work on vectors. 
-* **Logic:** 
-
-Show diagram of 1/x^2, we are plugging in the distance between the circles. The smaller `d` is, the greater the output is 
+* **Logic:** We will convert the math done in the function with autodiff functions to its corresponding mathematical equation.
 
 $$
 \frac{1}{||C_A - C_B||^2 } = \frac{1}{d^2}
 $$
 
-## TO-DO: Exercises
+So essentially, the `repel` function takes in two circles and returns the inverse of the distance between them squared, i.e. we plug in the distance $$d$$ between the circles as an input to the $$f(x)=\frac{1}{x^2}$$ function. 
 
-* make 2 circles disjoint, then disjoint with padding
+![Graph of 1/x^2 from Desmos](.gitbook/assets/1-x-2.png)
+
+If you look at the graph of $$f(x)=\frac{1}{x^2}$$, notice how the smaller $$d$$ is, the greater the output is, i.e. the **worse** penalty value we return. We  punish them for how close they are since we want to push them apart from each other. 
+
+## Exercises
+
+* Write a constraint that makes 2 circles disjoint from each other. Remember _disjoint_ means that the two circles do not overlap at all.
+* Write a new disjoint function that allows padding, i.e. closest distance between two circles will be the padding value. 
 
 Reference: [https://github.com/penrose/penrose/wiki/Getting-started\#writing-new-objectivesconstraintscomputations](https://github.com/penrose/penrose/wiki/Getting-started#writing-new-objectivesconstraintscomputations)
 
