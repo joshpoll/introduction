@@ -116,7 +116,7 @@ Here we see several things in play.
 * **Accessing Shape Property:** We access the shape's property value by `shapeName.propertyName.contents` , where we have `propertyName = r` for radius. 
 * **Logic:** We want the input circle to have a minimum size as the function name suggests, and remember with these functions, and we want to minimize whatever value we return. For example, with a bad small circle with a radius of 1, we will return 19, whereas with a good big circle with a radius of 30, we will return -10, which is much smaller, thus meaning it's good. 
 
-```text
+```typescript
 import { canvasSize } from "renderer/ShapeDef";
 
 maxSize: ([shapeType, props]: [string, any]) => {
@@ -133,7 +133,7 @@ With objectives, we want them to output the "badness" of the inputs \(as a numbe
 
 Now we look at an objective that makes two circles repel, i.e. encouraging the two circles to be far apart from each other. 
 
-```text
+```typescript
 repel: ([t1, s1]: [string, any], [t2, s2]: [string, any],
                                        weight = 10.0) => {
     const repelWeight = 10e6;
