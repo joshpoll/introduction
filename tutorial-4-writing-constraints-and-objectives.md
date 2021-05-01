@@ -155,7 +155,7 @@ $$
 
 So essentially, the `repel` function takes in two circles and returns the inverse of the distance between them squared, i.e. we plug in the distance $$d$$ between the circles as an input to the $$f(x)=\frac{1}{x^2}$$ function. 
 
-![Graph of 1/x^2 from Desmos](.gitbook/assets/1-x-2_label.png)
+![Graph of \(1/x^2\) from Desmos](.gitbook/assets/1-x-2_label.png)
 
 If you look at the graph of $$f(x)=\frac{1}{x^2}$$, notice how the smaller $$d$$ is, the greater the output is, i.e. the **higher** penalty value we return. We  punish them for how close they are since we want to push them apart from each other.  We block the negative horizontal range since our input $$d$$ will never be negative. 
 
