@@ -66,7 +66,7 @@ Here we have our `type t` as `Set`, and we want to all of our sets to be a circl
 
 `twosets.sty`
 
-```text
+```typescript
 forall Set x {
     x.icon = (* some shape object *)
 }
@@ -82,7 +82,7 @@ When we construct the `Circle` object for our Set, we need to look back at our g
 
 `twosets.sty`
 
-```text
+```typescript
 forall Set x {
     x.icon =  Circle {
         strokeWidth : 0.0

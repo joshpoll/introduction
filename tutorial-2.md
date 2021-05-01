@@ -78,7 +78,7 @@ Now our selector is not just `forall Set A` since we only want to apply these st
 
 `.sty`
 
-```typescript
+```text
 forall Set A; Set B
 where IsSubset(A, B) {
     ensure smallerThan(A.icon, B.icon)
@@ -97,7 +97,7 @@ Since we care about the sizes of **all** the sets, and need to **ensure** all of
 
 `.sty`
 
-```typescript
+```text
 forall Set x {
     x.icon = Circle {
         strokeWidth : 0.0
@@ -111,7 +111,7 @@ So putting it together, we have
 
 `.sty`
 
-```typescript
+```text
 forall Set A; Set B
 where IsSubset(A, B) {
     ensure smallerThan(A.icon, B.icon)
