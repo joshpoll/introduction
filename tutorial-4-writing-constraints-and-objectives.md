@@ -20,6 +20,7 @@ Things that need to be introduced here \(used later\)
 
 * penalty, energy function 
 * multiplying by weight \(for `repel`\) &lt;-- not necessary
+* mention how we take max\(x, 0\) for penalty value: negative values satisfies constraint
 
 ## Conceptual: How To Come Up With Constraints?
 
@@ -114,7 +115,7 @@ Here we see several things in play.
 * **Numbers:** Instead of directly using constant numbers `20`, we have to use `constOf(limit)` in order to pass it as a valid input for the autodiff function.
 * **Operations:** Instead of using the subtraction operator `-` like we normally do, we have to use the autodiff function `sub` .
 * **Accessing Shape Property:** We access the shape's property value by `shapeName.propertyName.contents` , where we have `propertyName = r` for radius. 
-* **Logic:** We want the input circle to have a minimum size as the function name suggests, and remember with these functions, and we want to minimize whatever value we return. For example, with a bad small circle with a radius of 1, we will return 19, whereas with a good big circle with a radius of 30, we will return -10, which is much smaller, thus meaning it's good. 
+* **Logic:** We want the input circle to have a minimum size as the function name suggests, and remember with these functions, and we want to minimize whatever value we return. For example, with a bad small circle with a radius of 1, we will return 19, whereas with a good big circle with a radius of 30, we will return -10, which is a negative number, thus satisfying the constraint. 
 
 ```typescript
 import { canvasSize } from "renderer/ShapeDef";
@@ -146,7 +147,7 @@ We will look at this code together step by step,
 
 * **Input:** The function takes in similar inputs as the constraint functions we've just looked at, where for convenience, instead of `shapeType` we are simply using `t`. For the last input `weight`, `repel` typically needs to have a weight multiplied since its magnitude is small. 
 * **Operations:** Here we use 3 autodiff functions, `inverse`, `mul`, and `ops.vdistsq.`The `mul` function does multiplication,  `inverse(v)` function returns `1 / v` and `ops.vdistsq(v, w)` returns the Euclidean distance squared between vectors `v` and `w`. Remember `ops` is for composite functions that work on vectors. 
-* **Logic:** We will convert the math done in the function with autodiff functions to its corresponding mathematical equation.
+* **Logic:** We will convert the math done in the second line of the function  to its corresponding mathematical equation.
 
 $$
 \frac{1}{||C_A - C_B||^2 } = \frac{1}{d^2}
@@ -156,12 +157,17 @@ So essentially, the `repel` function takes in two circles and returns the invers
 
 ![Graph of 1/x^2 from Desmos](.gitbook/assets/1-x-2.png)
 
-If you look at the graph of $$f(x)=\frac{1}{x^2}$$, notice how the smaller $$d$$ is, the greater the output is, i.e. the **worse** penalty value we return. We  punish them for how close they are since we want to push them apart from each other. 
+If you look at the graph of $$f(x)=\frac{1}{x^2}$$, notice how the smaller $$d$$ is, the greater the output is, i.e. the **higher** penalty value we return. We  punish them for how close they are since we want to push them apart from each other. 
+
+edit 
+
+* 1/x^2 graph: take out negative, label axis
+* show big constant/1x^2 graph as we multiply it by repel weight.
 
 ## Exercises
 
 * Write a constraint that makes 2 circles disjoint from each other. Remember _disjoint_ means that the two circles do not overlap at all.
-* Write a new disjoint function that allows padding, i.e. closest distance between two circles will be the padding value. 
+* Write a new disjoint function that allows padding, i.e. minimum distance between two circles will be the padding value. 
 
 Reference: [https://github.com/penrose/penrose/wiki/Getting-started\#writing-new-objectivesconstraintscomputations](https://github.com/penrose/penrose/wiki/Getting-started#writing-new-objectivesconstraintscomputations)
 
