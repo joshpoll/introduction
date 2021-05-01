@@ -5,4 +5,5 @@
 * [Tutorial 2: Predicates](tutorial-2.md)
 * [Tutorial 3: Functions](tutorial-3.md)
 * [Tutorial 4: Writing Constraints & Objectives](tutorial-4-writing-constraints-and-objectives.md)
+* [Summary](summary.md)
 
