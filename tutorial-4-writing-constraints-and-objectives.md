@@ -12,7 +12,7 @@ You are already equipped to create beautiful diagrams with what you have already
 
 We will start with understanding what, and how are constraints and objectives done in Penrose, and then we will go through several examples line by line to apply our conceptual understanding concretely. 
 
-## What is optimization?
+## What is optimization for Penrose?
 
 Penrose utilizes numerical optimization in order to produce beautiful diagrams. 
 
