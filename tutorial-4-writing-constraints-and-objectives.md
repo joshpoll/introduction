@@ -18,7 +18,7 @@ Penrose utilizes numerical optimization in order to produce beautiful diagrams.
 
 First, an optimization is simply the **search for the best solution** we can get subject to certain rules. For example, finding the best way to arrange your day with all the tasks that you need to finish during a certain timeframe is an optimization. 
 
-Second, the term numerical optimization is one kind of optimization, and a simple description of what it is is: we use some functions, that we call **energy / penalty functions**, to quantify how good our current solution is. The functions output a numerical value, hence _numerical_ optimization. Under the hood, **all constraint functions are implemented as energy functions**. 
+Second, the term _numerical optimization_ is one kind of optimization, and a simple description of what it is is: we use some functions, that we call **energy / penalty functions**, to quantify how good our current solution is. The functions output a numerical value, hence _numerical_ optimization. Under the hood, **all constraint functions are implemented as energy functions**. 
 
 Lastly, the way we write energy functions in a particular way, using **autodiff helper functions**, where autodiff stands for auto differentiation**.**  This is because Penrose takes the energy function's gradient $$\nabla$$ to find better and better solutions.  Fore more on optimization, here's a wonderful [introduction video](https://www.youtube.com/watch?v=sDAEFFoiKZ0).  
 
