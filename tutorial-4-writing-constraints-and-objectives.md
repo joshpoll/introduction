@@ -96,13 +96,13 @@ Since we penalize the amount the constraint is greater than `0`. So, this constr
 * I translate it to the zero-based inequality `f(x) - c <= 0`.
 * I translate the inequality constraint into an energy \(penalty\) `E(x) = f(x) - c` — it is greater than `0` iff the constraint is violated, and the more the constraint is violated, the higher the energy is \(e.g. if `f(x)` is way bigger than `c` then the energy is a lot bigger than `0`\). 
 
-### 5. Accessing Shape Field Value
-
-One common operation is to access the parameter of the shape, which is done via `shapeName.propertyName.contents`, which will return a `VarAD`.  For example, if you had a circle `c` as input, and you want its radius, doing `c.r.contents` will give you something like `5.0` \(wrapped in a `VarAD`\).
-
-### 6. Negative Outputs of Energy Functions
+### 5. Negative Outputs of Energy Functions
 
 Previously, we've talked about how we convert everything to zero-based inequality, so what happens when the energy function outputs a negative value? It simply means that the constraint is satisfied. What actually happens is that Penrose takes the energy function outputs with a wrapper `f(x) = max(x, 0)` where `x`  is the energy, so all negative values will be regarded as satisfying the constraint. 
+
+### 6. Accessing Shape Field Value
+
+One common operation is to access the parameter of the shape, which is done via `shapeName.propertyName.contents`, which will return a `VarAD`.  For example, if you had a circle `c` as input, and you want its radius, doing `c.r.contents` will give you something like `5.0` \(wrapped in a `VarAD`\).
 
 ## Constraints Example: minSize & maxSize
 
