@@ -62,9 +62,9 @@ As shown above, we can conclude that the more contained circle $$A$$ is inside c
 
 ## Concrete: How We Write Constraints
 
-With our Penrose triple, the syntax is most likely familiar to you from your prior programming experiences, but with constraints, we will be writing code in a particular way that allows Penrose to use a particular technique called **automatic differentiation,** _**autodiff**_ ****for short. The Penrose system uses autodiff to find the optimized diagram. Essentially, we need to write constraints and objectives in a specific way in order for Penrose to do its magic. For more on autodiff, read [here](https://github.com/penrose/penrose/wiki/Autodiff-guide#introduction). 
+With our Penrose triple, the syntax is most likely familiar to you from your prior programming experiences, but with constraints, we will be writing code in a particular way that allows Penrose to use a particular technique called **automatic differentiation,** _**autodiff**_ ****for short. The Penrose system uses autodiff to find the optimized diagram. For more on autodiff, read [here](https://github.com/penrose/penrose/wiki/Autodiff-guide#introduction). 
 
-So now, how exactly do we write it? 
+There are several key rules and tricks we use when writing constraints. 
 
 ### 1. Autodiff functions
 
@@ -82,7 +82,7 @@ For example, if we need to do `5 + 3` , the equivalent autodiff expression is `a
 
 We must write these functions in _straight-line functional style_ \(i.e. no imperative style, no mutating state, no for-loops or if statements\). These restrictions are so the Penrose system can work its magic. Therefore we need to avoid writing things like `x = x + 1`  which translates to `let x = add(x, constOf(1))`  in autodiff code, and instead use constant intermediate variables like this: `const x0 = ... const x1 = add(x0, constOf(1))`. 
 
-### 4. Zero-based inequality to penalty \(will be edited down according to how the definition section goes\)
+### 4. Zero-based inequality to energy function
 
 For every constraint function we write, we take in shapes and output a number or a tensor as penalty. In short, Penrose will try to minimize the outputs of all the constraint functions used for the diagram. 
 
@@ -90,7 +90,7 @@ When we write a constraint, for example, we want to constrain one circle `s1` to
 
 Since we penalize the amount the constraint is greater than `0`. So, this constraint is written as `r1 - r2 - offset > 0`, or `p(r1, r2) = r1 - r2 - offset`. 
 
-#### Some general rules on writing penalty: 
+#### Some general rules on writing energy function: 
 
 * Let's say I want the constraint `f(x) <= c` to be true.
 * I translate it to the zero-based inequality `f(x) - c <= 0`.
@@ -99,6 +99,10 @@ Since we penalize the amount the constraint is greater than `0`. So, this constr
 ### 5. Accessing Shape Field Value
 
 One common operation is to access the parameter of the shape, which is done via `shapeName.propertyName.contents`, which will return a `VarAD`.  For example, if you had a circle `c` as input, and you want its radius, doing `c.r.contents` will give you something like `5.0` \(wrapped in a `VarAD`\).
+
+### 6. Negative Outputs of Energy Functions
+
+Previously, we've talked about how we convert everything to zero-based inequality, so what happens when the energy function outputs a negative value? It simply means that the constraint is satisfied. What actually happens is that Penrose takes the energy function outputs with a wrapper `f(x) = max(x, 0)` where `x`  is the energy, so all negative values will be regarded as satisfying the constraint. 
 
 ## Constraints Example: minSize & maxSize
 
