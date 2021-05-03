@@ -14,13 +14,13 @@ We will start with understanding what, and how are constraints and objectives do
 
 ## TO-DO: What is optimization / energy function? What is a constraint?
 
-try watching keenan lecture + screenshot slides to write this section  
+Penrose utilizes numerical optimization in order to produce beautiful diagrams. 
 
-Things that need to be introduced here \(used later\)
+First, an optimization is simply the **search for the best solution** we can get subject to certain rules. For example, finding the best way to arrange your day with all the tasks that you need to finish during a certain timeframe is an optimization. 
 
-* penalty, energy function 
-* multiplying by weight \(for `repel`\) &lt;-- not necessary
-* mention how we take max\(x, 0\) for penalty value: negative values satisfies constraint
+Second, the term numerical optimization is one kind of optimization, and a simple description of what it is is: we use some functions, that we call **energy / penalty functions**, to quantify how good our current solution is. The functions output a numerical value, hence _numerical_ optimization. Under the hood, **all constraint functions are implemented as energy functions**. 
+
+Lastly, the way we write energy functions in a particular way, using **autodiff helper functions**, where autodiff stands for auto differentiation**.**  This is because Penrose takes the energy function's gradient $$\nabla$$ to find better and better solutions.  Fore more on optimization, here's a wonderful [introduction video](https://www.youtube.com/watch?v=sDAEFFoiKZ0).  
 
 ## Conceptual: How To Come Up With Constraints?
 
@@ -28,7 +28,7 @@ In the normal world, when we want a circle A contained in another circle B, this
 
 ![](.gitbook/assets/mentalpicture.png)
 
-We have a mental picture of _containment_  means to us, but there is no way for us to transfer this mental picture directly to the Penrose system and say, "Okay this is what we want when we write  `isContained(A, B)`". Therefore we need to pause for a second, and really think about what does it meant for a circle to be contained in another circle mathematically. 
+We have a mental picture of what _containment_  means to us, but there is no way for us to transfer this mental picture directly to the Penrose system and say, "Okay this is what we want when we write  `isContained(A, B)`". Therefore we need to pause for a second, and **really** think about what does it meant for a circle to be contained in another circle mathematically. 
 
 There are generally 3 scenarios for the containment relationship between 2 circles. 
 
