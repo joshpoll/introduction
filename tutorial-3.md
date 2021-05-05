@@ -28,7 +28,7 @@ For more in-depth explanations on the starter code, we prepared a separate docum
 
 ## 📄 Domain
 
-We will write our first function in Penrose together💫!
+We will write our first function in Penrose together 💫!
 
 In Penrose, functions are declarative, just like everything else. Functions allow us to compose already defined elements into new elements. They only have inputs and outputs. We will add a new line to our `.dsl` file that defines `addV`, which adds two vectors.
 
