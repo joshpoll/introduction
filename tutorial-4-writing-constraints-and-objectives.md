@@ -52,7 +52,7 @@ Another information we will be using is the distance $$d$$ between the radii. No
 
 Let's see a scenario when a circle is perfectly contained in another one. 
 
-![](.gitbook/assets/k_contain.png)
+![Perfect Containment Example](.gitbook/assets/k_contain.png)
 
 Circle 1 contains circle 2 if and only if circle 1's radius is greater than the distance between their centers, plus circle 2's radius, i.e. $$r_1 > d+r_2$$. This diagram shows the most illustrative case when Circle 2 is just contained, which we can understand by intuitively reasoning about the directions of change for each degree of freedom. 
 
