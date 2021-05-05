@@ -50,9 +50,18 @@ The center coordinate and radius are the information we have about **any** circl
 
 Another information we will be using is the distance $$d$$ between the radii. Notice how the distance is progressively bigger as $$A$$ and $$B$$ are more disjoint. When $$A, B$$ are disjoint, we see that $$d$$'s value is the greatest. 
 
-As we've said earlier, when writing constraints, we want to translate everything to zero-based inequality. Now, think about the value $$r_{difference}=r_B-r_A$$, which is the difference of radii between the circles. Using both $$r_{difference}$$ and $$d$$, we can determine whether if $$A$$ is contained in $$B$$. In particular, consider the value of $$d-r_{difference}$$.
+Let's see a scenario when a circle is perfectly contained in another one. 
 
-Here's a short little proof. Read on if you are still a bit hesitant. 
+![](.gitbook/assets/k_contain.png)
+
+Circle 1 contains circle 2 if and only if circle 1's radius is greater than the distance between their centers, plus circle 2's radius, i.e. $$r_1 > d+r_2$$. This diagram shows the most illustrative case when Circle 2 is just contained, which we can understand by intuitively reasoning about the directions of change for each degree of freedom. 
+
+* If $$r_2$$ is any smaller, clearly Circle 2 remains contained. If $$r_2$$ is any larger, clearly Circle 2 is no longer contained. 
+* If $$d$$ is any smaller, then clearly Circle 2 remains contained; if $$d$$ is any larger, then Circle 2 is no longer contained. 
+* If $$r_1$$ is any larger, then clearly Circle 2 remains contained; if $$r_1$$ is any smaller, then Circle 2 is no longer contained. 
+* Then by pushing variables, we can arrive at the energy expression $$d - (r1 - r2) < 0$$. 
+
+Here's a short little proof. Read on if you are still a bit hesitant. Let $$r_{difference}=r_B-r_A$$.
 
 * We know $$r_{difference}<0$$ when $$r_A > r_B$$, i.e. radius of the circle A \(that we want to be contained\) is greater than the radius of circle B, and in that case, A cannot be contained by B. Then we have $$d-r_{difference}>d$$.
 * We have $$r_{difference} = 0$$ when $$r_A = r_B$$, i.e. the radii of the two circles are equal, and they can be contained in each other if and only if distance $$d=r_B=r_A$$ , then $$d-r_{difference}=d$$.
