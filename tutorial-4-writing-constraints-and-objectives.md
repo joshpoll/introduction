@@ -166,7 +166,7 @@ If you look at the graph of $$f(x)=\frac{1}{x^2}$$, notice how the smaller $$d$$
 
 We then return the value above multiplied by the `repelWeight`, and let's take a look at the graph of $$\frac{10e6}{x^2}$$.
 
-![Graph of \(1/x^2\)\*10e6 from Desmos](.gitbook/assets/eps-x-2_label.png)
+![Graph of \(10e6/x^2\) from Desmos](.gitbook/assets/eps-x-2_label.png)
 
 If you compare the two graphs above, you can see how we expanded the range of extreme high outputs by multiplying $$\frac{1}{x^2}$$ with a big constant. 
 
