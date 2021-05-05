@@ -126,7 +126,7 @@ forall Set x {
 
 ![](.gitbook/assets/e1c2.png)
 
-[Reference solutions](https://github.com/penrose/penrose/blob/docs-edit/tutorial/exercise2-sol.md)
+[Reference solutions](https://github.com/penrose/penrose/blob/docs-edit/tutorial/code/tutorial2/exercises-sol.md)
 
 ## Take-aways
 
