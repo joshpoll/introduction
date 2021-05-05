@@ -2,7 +2,7 @@
 description: Predicates & Constraints
 ---
 
-# Tutorial 2: Predicates
+# Tutorial 2: Using Predicates
 
 In Penrose, we are not only given the power to represent mathematical objects with shapes, but we are also able to represent complicated relationships between the objects. In this tutorial, we will learn about defining `predicate` and visually represent `predicate` with the constraint keyword `ensure`. After this tutorial, you should be equipped to diagrams relationships between objects with Penrose.
 
