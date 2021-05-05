@@ -8,17 +8,6 @@ So far, we've directly declared substances in our diagram, which can then have s
 
 Now we will introduce functions in Penrose, which allow us to compose atomic substances in the diagram and define **new** substances based on **existing** ones. It's a very powerful feature and you will find it super convenient in your journey as a Penrose developer 🌹.
 
-## Table of Contents
-
-* [Tutorial Homepage](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial.md)
-* [Goal](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial-p3.md#goal)
-* [Domain File](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial-p3.md#page_facing_up-domain)
-* [Substance File](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial-p3.md#page_facing_up-substance)
-* [Style File](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial-p3.md#page_facing_up-style)
-* [Exercises](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial-p3.md#exercises)
-* [Take-aways](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial-p3.md#take-aways)
-* Next Tutorial: Coming Up!
-
 ## Goal
 
 We've had a good time with Set Theory, now we will move on to visualizing✨ **vectors**✨ that you have mostly likely encountered in your high school physics or math class.
@@ -43,7 +32,7 @@ We will write our first function in Penrose together💫!
 
 In Penrose, functions are declarative, just like everything else. Functions allow us to compose already defined elements into new elements. They only have inputs and outputs. We will add a new line to our `.dsl` file that defines `addV`, which adds two vectors.
 
-```text
+```typescript
 /* new line in .dsl file */
 function addV: Vector * Vector -> Vector
 ```
@@ -58,7 +47,7 @@ The syntax for composing a new object using a function involves a new operator `
 
 We write `y := f(x)` to define `y` as `f(x)`. Therefore we define a new vector by `Vector u := addV(v, w)`. Furthermore, we want `u` to be in our original vector space along with our existing vectors `v` and `w`, therefore we use the already defined predicate `In` on `u` and `U` by writing `In(u, U)`.
 
-```text
+```typescript
 /* new lines in .sub file ******/
 Vector u := addV(v, w)
 In(u, U)
@@ -87,7 +76,7 @@ Every vector exists in a vector space, and we draw them at the origin of the spe
 
 We start with writing the selector, selecting vectors that are in a vector space.
 
-```text
+```typescript
 forall Vector u; VectorSpace U
 where In(u, U) {
   /* draw a vector in vector space */
@@ -98,7 +87,7 @@ Similar to what we did in the previous tutorials with sets. We use Penrose to vi
 
 Next, vectors are commonly visually represented by single-head arrows➡️, where the dull end is anchored at the origin, and the arrow head points at the vector position in space. Therefore we will need to assign some field of `u` to an arrow shape object to draw an arrow on the screen.
 
-```text
+```typescript
 u.shape = Arrow {
   start: U.origin 
   end : U.origin + u.vector 
@@ -114,7 +103,7 @@ Note that the field name `shape` can be replaced by anything you want, we just n
 
 Lastly, we need a field to write the variable name of our vector in the diagram.
 
-```text
+```typescript
 u.text = Text {
   string : u.label
   color : u.shape.color /* this way it changes accordingly when we change the arrow's color */
@@ -129,7 +118,7 @@ Just one more step for this task. We will need to place some constraints on how 
 
 So we write the following lines to let Penrose know the above:
 
-```text
+```typescript
 ensure contains(U.background, u.shape)
 ensure contains(U.background, u.text)
 ensure atDist(u.shape, u.text, 15.0)
@@ -147,7 +136,7 @@ layer u.text above U.yAxis
 
 Again, we start with writing a selector. Here we have a bit more selection to do, since we have 3 vectors and 1 vector space involved. Furthermore, we want make sure that both `u,v,w` are indeed in the same vector space. Therefore, our selector will be the following,
 
-```text
+```typescript
 forall Vector u; Vector v; Vector w; VectorSpace U
 where u := addV(v,w); In(u, U); In(v, U); In(w, U)
 ```
@@ -158,7 +147,7 @@ When we manually add 2 vectors, we add their x values and y values to get the ne
 
 Since Penrose supports vector in the style program \(read about more features [here](https://github.com/penrose/penrose/wiki/Style-language-spec#vectors-and-matrices)\), to get the sum of two vectors we simply need to add them using the `+` operator. But don't forget that all the vectors are offset by the origin vector, therefore we also need to subtract the origin from our sum.
 
-```text
+```typescript
 /* new lines in .sty file */
 forall Vector u; Vector v; Vector w; VectorSpace U
 where u := addV(v,w); In(u, U); In(v, U); In(w, U) {
