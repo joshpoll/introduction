@@ -64,7 +64,7 @@ forall Set x {
 
 So, what are the shapes we can use? Currently, the system supports 12 different shapes, and you can find the specs for every shape [here](https://github.com/penrose/penrose/wiki/Shape-library). It is a page that you will visit frequently as you work in Penrose.
 
-![Circle Spec](https://github.com/penrose/penrose/raw/docs-edit/assets/tutorial/part1/circle_spec.png)
+![](.gitbook/assets/circle_spec.png)
 
 This is the specification for the shape **Circle**, and all the other shapes we have available are documented in the same way. You can see a sample diagram of how the shape will look like, and a table that lists out the different properties you can manipulate.
 
