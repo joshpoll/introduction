@@ -14,7 +14,7 @@ We will start with understanding what, and how are constraints and objectives do
 
 ## What is optimization for Penrose?
 
-Penrose utilizes numerical optimization in order to produce beautiful diagrams. 
+Penrose utilizes numerical optimization in order to produce beautiful diagrams. We will explain what optimization is, followed by what numerical optimization is. 
 
 Optimization broadly is the search for the best solution to a problem subject to certain rules. For example, finding the best way to arrange your day with all the tasks that you need to finish during a certain timeframe is an optimization. 
 
@@ -22,7 +22,7 @@ The term numerical optimization is one kind of optimization, and a simple descri
 
 Lastly, we write energy functions in a particular way using **autodiff helper functions**, where autodiff stands for auto differentiation**.**  This is because Penrose takes the energy function's gradient $$\nabla$$, i.e. take the derivatives of the function, to find better and better solutions.  Fore more on optimization, here's a wonderful [introduction video](https://www.youtube.com/watch?v=sDAEFFoiKZ0).  
 
-In short,  we write energy functions with a specific set of operations in order for Penrose to optimize, finding the best diagram for us.  
+> In short, we write energy functions with a specific set of operations in order for Penrose to optimize, finding the best diagram for us.
 
 ## Conceptual: How To Come Up With Constraints?
 
