@@ -28,12 +28,12 @@ The syntax for declaring a relationship is through the use of keyword `predicate
 
 For our relationship, it follows naturally that the name should be `IsSubset`, and we have 2 arguments of type `Set`.
 
-`setTheory.dsl`
-
+{% code title="setTheory.dsl" %}
 ```typescript
 type Set
 predicate IsSubset : Set s1 * Set s2
 ```
+{% endcode %}
 
 Now we are free to use the predicate `IsSubset` in our `.sub` and define what it means visually in our `.sty`.
 
@@ -43,13 +43,13 @@ In our goal diagram, we have 3 sets, therefore we will declare 3 different sets 
 
 Then we want to declare the relationship between the sets.
 
-`.sub`
-
+{% code title=".sub" %}
 ```typescript
 Set A, B, C
 IsSubset(B, A)
 IsSubset(C, B)
 ```
+{% endcode %}
 
 ## 📄 Style
 
@@ -65,8 +65,7 @@ Therefore we call the corresponding `ensure` functions on the `.icon` fields \(t
 
 Now our selector is not just `forall Set A` since we only want to apply these styling rules to the sets that have the relationship `isSubset`, therefore we need to condition on the arbitrary sets we are looping through in the program with the keyword `where HasRelationshipR(A, B)` where the `HasRelationshipR` is `IsSubset` for this particular case.
 
-`.sty`
-
+{% code title=".sty" %}
 ```typescript
 forall Set A; Set B
 where IsSubset(A, B) {
@@ -75,6 +74,7 @@ where IsSubset(A, B) {
     A.icon above B.icon
 }
 ```
+{% endcode %}
 
 Notice that in our first example, we did not care about the size of our shapes, but now we do care about the size since we want specific hiearchy of sizes, and in the process of forcing containments of the circles, the circles can get _**TOO BIG**_ or _**TOO SMALL**_. So we need to specify a range of acceptable sizes for our circles so nothing goes crazy.
 
@@ -84,8 +84,7 @@ This is what might happen when you don't constrain the sizes.👿
 
 Since we care about the sizes of **all** the sets, and need to **ensure** all of their sizes are within a reasonable range, we will again make use of our newly introduced keyword `ensure`. We call `ensure` on the fields of the object we want to make sure that are within reasonable range. Since we want to constrain the size of the shapes, we call `ensure MinSize(x.icon)` and `ensure maxSize(x.icon)`.
 
-`.sty`
-
+{% code title=".sty" %}
 ```typescript
 forall Set x {
     x.icon = Circle {
@@ -95,11 +94,11 @@ forall Set x {
     ensure maxSize(x.icon)
 }
 ```
+{% endcode %}
 
 So putting it together, we have
 
-`.sty`
-
+{% code title=".sty" %}
 ```typescript
 forall Set A; Set B
 where IsSubset(A, B) {
@@ -115,6 +114,7 @@ forall Set x {
     ensure maxSize(x.icon)
 }
 ```
+{% endcode %}
 
 ## Exercises
 
