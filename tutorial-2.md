@@ -126,6 +126,8 @@ forall Set x {
 
 ![](.gitbook/assets/e1c2.png)
 
+[Reference solutions](https://github.com/penrose/penrose/blob/docs-edit/tutorial/exercise2-sol.md)
+
 ## Take-aways
 
 * We use the keyword `predicate` to define relationship between objects.
