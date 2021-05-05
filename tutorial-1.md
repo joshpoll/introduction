@@ -109,7 +109,7 @@ _Since we are not defining all the properties that control how the shape will lo
 
 ![](.gitbook/assets/tutorial1c3.png)
 
-After you are done, you can double check your work with [solutions](https://github.com/penrose/penrose/blob/docs-edit/tutorial/exercise1-sol.md).
+After you are done, you can double check your work with [solutions](https://github.com/penrose/penrose/blob/docs-edit/tutorial/code/tutorial1/exercises-sol.md).
 
 ## Take-aways
 
@@ -121,5 +121,5 @@ After you are done, you can double check your work with [solutions](https://gith
 * We define the substances in our diagram by declaring its type and its variable name in `.sub`.
 * We define the styles using the syntax `forall TYPE_NAME x { /* declarations */ }` in `.sty`.
 
-Now we are going to start our [second tutorial](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial-p2.md) that teaches a set of new skills, allowing you to create more intricate and complex diagrams with Penrose. Take a stretch or a little walk, and get ready to be one step closer to being a Penrose expert!😄
+Now we are going to start our second tutorial that teaches a set of new skills, allowing you to create more intricate and complex diagrams with Penrose. Take a stretch or a little walk, and get ready to be one step closer to being a Penrose expert!😄
 
