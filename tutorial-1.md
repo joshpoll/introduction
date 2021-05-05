@@ -78,7 +78,7 @@ So, what are the shapes we can use? Currently, the system supports 12 different 
 
 This is the specification for the shape **Circle**, and all the other shapes we have available are documented in the same way. You can see a sample diagram of how the shape will look like, and a table that lists out the different properties you can manipulate.
 
-When we construct the `Circle` object for our Set, we need to look back at our goal diagram. Our desired circles are strokeless, therefore we will set `strokeWidth: 0.0`. For all the other properties that we did not specify, Penrose will choose the best value for them based on optimization, or in other words, Penrose will choose the best for you, so you do not have to worry.
+When we construct the `Circle` object for our Set, we need to look back at our goal diagram. Our desired circles do not have strokes, therefore we will set `strokeWidth: 0.0`. For all the other properties that we did not specify, Penrose will choose the best value for them based on optimization, or in other words, Penrose will choose the best for you, so you do not have to worry.
 
 `twosets.sty`
 
@@ -94,9 +94,9 @@ And that's a wrap!🎉
 
 ## 🏗️ Compile
 
-Now it's time to see all of our hardwork \(drumroll please🥁\)! To compile your Penrose programs \(more detailed description [here](https://github.com/penrose/penrose/wiki/Getting-started)\), you need:
+Now it's time to see all of our hard work \(drumroll please🥁\)! To compile your Penrose programs \(more detailed description [here](https://github.com/penrose/penrose/wiki/Getting-started)\), you need:
 
-* two terminals opened both at the penrose root directory
+* two terminals opened both at the Penrose root directory
 * run `yarn start` in one to get the browser window to pop out
 * run `roger watch twosets.sub twosets.sty setTheory.dsl` to send the files over to the server
 * Refresh!

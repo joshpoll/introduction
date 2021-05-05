@@ -8,21 +8,21 @@ description: Writing Constraints & Objectives
 
 We've been using constraints and objectives in our previous tutorials, and now we will begin writing our own constraints and objectives! Being able to write your own constraints and objectives is an important step in becoming an **advanced Penrose developer**. 
 
-You are already equipped to create beautiful diagrams with what you have already learned from the previous tutorials as an user of the Penrose system, whereas with the knowledge from this tutorial, you will be __**extending the existing Penrose system**, contributing to the platform for many other users. 
+You are already equipped to create beautiful diagrams with what you have already learned from the previous tutorials as _an user of the Penrose system_, whereas with the knowledge from this tutorial, you will be __**extending the existing Penrose system**, contributing to the platform for many other users. 
 
 We will start with understanding what, and how are constraints and objectives done in Penrose, and then we will go through several examples line by line to apply our conceptual understanding concretely. 
 
 ## What is optimization for Penrose?
 
-Penrose utilizes numerical optimization in order to produce beautiful diagrams. We will explain what optimization is, followed by what numerical optimization is. 
+Penrose utilizes numerical optimization in order to produce beautiful diagrams. 
 
-Optimization broadly is the search for the best solution to a problem subject to certain rules. For example, finding the best way to arrange your day with all the tasks that you need to finish during a certain timeframe is an optimization. 
+First, an optimization is simply the **search for the best solution** we can get subject to certain rules. For example, finding the best way to arrange your day with all the tasks that you need to finish during a certain timeframe is an optimization. 
 
-The term numerical optimization is one kind of optimization, and a simple description is that we use some functions, that we call **energy functions**, to quantify how good our current solution is. The functions output a numerical value, hence _numerical_ optimization. Under the hood, **all constraint functions are implemented as energy functions**. 
+Second, the term numerical optimization is one kind of optimization, and a simple description is that we use some functions, that we call **energy / penalty functions**, to quantify how good our current solution is. The functions output a numerical value, hence _numerical_ optimization. Under the hood, **all constraint functions are implemented as energy functions**. 
 
 Lastly, we write energy functions in a particular way using **autodiff helper functions**, where autodiff stands for auto differentiation**.**  This is because Penrose takes the energy function's gradient $$\nabla$$, i.e. take the derivatives of the function, to find better and better solutions.  Fore more on optimization, here's a wonderful [introduction video](https://www.youtube.com/watch?v=sDAEFFoiKZ0).  
 
-> In short, we write energy functions with a specific set of operations in order for Penrose to optimize, finding the best diagram for us.
+In short,  we write energy functions with a specific set of operations in order for Penrose to optimize, finding the best diagram for us.  
 
 ## Conceptual: How To Come Up With Constraints?
 
