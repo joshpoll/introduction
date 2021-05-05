@@ -24,7 +24,7 @@ This example is a bit more involved than the previous tutorials so we are provid
 
 There are comments in the starter code that documents each block briefly. In this exercise we are mainly working on the `.sty` file, thus the given `.dsl` and `.sub` file contains almost everything we need. This will be a common occurrence for you if you are a domain expert, crafting different visualizations for a domain.
 
-### 👉 For more in-depth explanations on the starter code, we prepared a separate document [here](https://github.com/penrose/penrose/blob/docs-edit/tutorial/supplementary/tutorial3/starter-code-walk-through.md).
+For more in-depth explanations on the starter code, we prepared a separate document [here](https://github.com/penrose/penrose/blob/docs-edit/tutorial/supplementary/tutorial3/starter-code-walk-through.md).
 
 ## 📄 Domain
 
