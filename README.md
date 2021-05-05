@@ -12,7 +12,20 @@ Ready to make some beautiful diagrams? Penrose is accessible for people with a v
 
 ## Table of Contents
 
-In this page, we introduce Penrose's general approach and system, we will learn about how to install, how to think about diagramming, and what makes up a Penrose diagram.  The real fun begins when you dive into the series of tutorials we have prepared for you. If you already have the knowledge about what I just listed, feel free to skip this page and start your first tutorial. You can navigate through tutorials using the navigation bar on the left, and navigate  a single page using the navigation bar on the right. 
+* [Introduction to Penrose Programs](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial.md#introduction)
+  * [Installation](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial.md#installation)
+  * [How do we diagram by hand?](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial.md#how-do-we-diagram-by-hand)
+  * [What makes a Penrose program?](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial.md#what-makes-a-penrose-program)
+  * [Sneak peak of the tutorials](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial.md#sneak-peak-of-the-tutorials)
+* [Part 1: Make Your First Diagram](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial-p1.md)
+  * [Tutorial](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial-p1.md#part-1-penrose-basics)
+  * [Exercise](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial-p1.md#exercise)
+* [Part 2: Predicates & Constraints](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial-p2.md)
+  * [Tutorial](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial-p2.md#part-2-predicates--constraints)
+  * [Exercise](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial-p2.md#exercise)
+* [Part 3: Functions](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial-p3.md)
+  * [Tutorial](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial-p3.md#part-3-functions)
+  * [Exercise](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial-p3.md#exercises)
 
 The sections build on top of each other, using the skillsets we've acquired in the previous exercises, therefore we highly recommend you to follow through the tutorials in order. Each individual part contains a detailed walk through of a particular example and several exercises for you to consolidate your knowledge.
 

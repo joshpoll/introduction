@@ -6,16 +6,6 @@ description: Basics
 
 This is the first diagram we will make together. This is the equivalent of the `print("Hello World")` program for Penrose. To make any mathematical diagram, we first need to be able to put down some **shapes** we want. In this tutorial, we will learn about how to build a triple \(`.dsl`, `.sub`, `.sty`\) for a simple diagram of two circles.
 
-## Table of Contents
-
-* [Tutorial Homepage](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial.md)
-* [Goal](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial-p1.md#goal)
-* [Domain File](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial-p1.md#page_facing_up-domain)
-* [Substance File](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial-p1.md#page_facing_up-substance)
-* [Style File](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial-p1.md#page_facing_up-style)
-* [Take-aways](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial-p1.md#take-aways)
-* [Next Tutorial: Predicates & Constraints](https://github.com/penrose/penrose/edit/docs-edit/tutorial/tutorial-p2.md)
-
 ## Goal
 
 ![exercise 1 result](https://github.com/penrose/penrose/raw/docs-edit/assets/tutorial/part1/2sets_nolabel.png)
