@@ -118,6 +118,14 @@ forall Set x {
 
 ## Exercises
 
+* Define a predicate `Intersecting` that takes in two sets, and outputs 2 circles that overlap.
+
+![](.gitbook/assets/e1c1.png)
+
+* Define a predicate that is the opposite of `Intersecting` that takes in two sets, and outputs 2 circles that are disjoint.
+
+![](.gitbook/assets/e1c2.png)
+
 ## Take-aways
 
 * We use the keyword `predicate` to define relationship between objects.
