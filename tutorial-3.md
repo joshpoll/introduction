@@ -97,7 +97,7 @@ u.shape = Arrow {
 }
 ```
 
-Note that the field name `shape` can be replaced by anything you want, we just need to assign the penrose shape object to some field \(remember in tutorial 1 we used `.icon`\). Here we are simply defining some properties of the `Arrow` shape object.
+Note that the field name `shape` can be replaced by anything you want, we just need to assign the Penrose shape object to some field \(remember in tutorial 1 we used `.icon`\). Here we are simply defining some properties of the `Arrow` shape object.
 
 🗒️ Side note: **3.0 is not the same as 3**. This is important when you need a **float** versus an **int**. We often write **3.**, thus ignoring the zero after the decimal point for convenience.
 
@@ -155,7 +155,7 @@ where u := addV(v,w); In(u, U); In(v, U); In(w, U) {
 }
 ```
 
-This is easier than you expected, right?😄 You're all done with this tutorial! Take a sip of water and come back to solidify your knowledge with the following exercises.🌴
+This is easier than you expected, right? You're all done with this tutorial! Take a sip of water and come back to solidify your knowledge with the following exercises.🌴
 
 [Complete code for the example.](https://github.com/penrose/penrose/blob/docs-edit/tutorial/code/tutorial3/complete-code/vector.sty#L69)
 
@@ -164,6 +164,16 @@ This is easier than you expected, right?😄 You're all done with this tutorial!
 _FYI: All the sample goal diagrams are only a single sampling of many possible variations._
 
 We follow the convention of `u` being the resultant vector, and use `v, w` for input vectors.
+
+* **Exercise 1:** Create a new function that computes vector subtraction, and draws the difference vector, i.e. `u = v - w`.
+
+![Exercise 1 Goal](.gitbook/assets/difference.jpeg)
+
+* **Exercise 2:** Create a new function that computes scalar multiplication, and draws the scaled vector, i.e. `u = a * v` where `a` is a scalar. Start with defining a new type `Scalar`, and define the function accordingly. With styles, first try having a fixed valued scalar, eg. let the scalar be `5.0`. Then make use of `?` and constraints to have arbitrary scalars. Hint: `inRange` is a helpful function, and `(2, 5)` is a nice bound.
+
+![Exercise 2 Goal](.gitbook/assets/scaled.jpeg)
+
+* **Exercise 3:** Add more lines of code to the `addV` block in style file to visualize the Parallelogram method of vector addition.
 
 📏 _Parallelogram Method Steps_:
 
