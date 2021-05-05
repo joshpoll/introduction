@@ -1,5 +1,5 @@
 ---
-description: Writing Constraints & Objectives
+description: Learn How To Write Constraints & Objectives As A Penrose Developer
 ---
 
 # Tutorial 4: Writing Constraints & Objectives
@@ -175,5 +175,5 @@ If you compare the two graphs above, you can see how we expanded the range of ex
 * Write a constraint that makes 2 circles disjoint from each other. Remember _disjoint_ means that the two circles do not overlap at all.
 * Write a new disjoint function that allows padding, i.e. minimum distance between two circles will be the padding value. 
 
-Reference: [https://github.com/penrose/penrose/wiki/Getting-started\#writing-new-objectivesconstraintscomputations](https://github.com/penrose/penrose/wiki/Getting-started#writing-new-objectivesconstraintscomputations)
+More Reading: [https://github.com/penrose/penrose/wiki/Getting-started\#writing-new-objectivesconstraintscomputations](https://github.com/penrose/penrose/wiki/Getting-started#writing-new-objectivesconstraintscomputations)
 
