@@ -14,7 +14,7 @@ We will start with understanding what, and how are constraints and objectives do
 
 ## Diagramming From A Technical Perspective
 
-Making a diagram can be encoded as an **optimization problem.** Parts of a diagram can be quantified using objectives and constraints. \*\*\*\*\*_**Need to introduce energy here\*\*\*\*\*\***_ The lower the energy, the better that part of the diagram is.  \*\*\*\*\*_**Need to introduce why we are mentioning local minima here\*\*\*\*\*\***_  Local minima of the overall energy function correspond to diagrams that can't be improved by making any local adjustments. Often, in the process of diagramming, there is not just one good diagram, but many solutions--that is, there are many local minima of the energy function. Given a Style program, which defines an energy function for your family of diagrams, Penrose looks for a local minimum of the energy function by using numerical optimization.
+Making a diagram can be encoded as an **optimization problem.** Parts of a diagram can be quantified using objectives and constraints. The lower the energy, the better that part of the diagram is. Local minima of the overall energy function correspond to diagrams that can't be improved by making any local adjustments. Often, in the process of diagramming, there is not just one good diagram, but many solutions--that is, there are many local minima of the energy function. Given a Style program, which defines an energy function for your family of diagrams, Penrose looks for a local minimum of the energy function by using numerical optimization.
 
 Penrose utilizes numerical optimization in order to produce beautiful diagrams. We will explain what optimization is, followed by what numerical optimization is. 
 
@@ -185,22 +185,6 @@ If you compare the two graphs above, you can see how we expanded the range of ex
 
 * Write a constraint that makes 2 circles disjoint from each other. Remember _disjoint_ means that the two circles do not overlap at all.
 * Write a new disjoint function that allows padding, i.e. minimum distance between two circles will be the padding value. 
-
-### Exercise Solutions
-
-```typescript
-disjoint: ([t1, s1]: [string, any], [t2, s2]: [string, any]) => {
-    const res = add(r1, r2);
-    return sub(res, ops.vdist(center1, center2));
-}
-```
-
-```typescript
-disjointPadding: ([t1, s1]: [string, any], [t2, s2]: [string, any], padding : number) => {
-    const res = add(add(r1, r2), constOf(padding));
-    return sub(res, ops.vdist(center1, center2));
-}
-```
 
 More Reading: [https://github.com/penrose/penrose/wiki/Getting-started\#writing-new-objectivesconstraintscomputations](https://github.com/penrose/penrose/wiki/Getting-started#writing-new-objectivesconstraintscomputations)
 
