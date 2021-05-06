@@ -186,5 +186,21 @@ If you compare the two graphs above, you can see how we expanded the range of ex
 * Write a constraint that makes 2 circles disjoint from each other. Remember _disjoint_ means that the two circles do not overlap at all.
 * Write a new disjoint function that allows padding, i.e. minimum distance between two circles will be the padding value. 
 
+### Exercise Solutions
+
+```typescript
+disjoint: ([t1, s1]: [string, any], [t2, s2]: [string, any]) => {
+    const res = add(r1, r2);
+    return sub(res, ops.vdist(center1, center2));
+}
+```
+
+```typescript
+disjointPadding: ([t1, s1]: [string, any], [t2, s2]: [string, any], padding : number) => {
+    const res = add(add(r1, r2), constOf(padding));
+    return sub(res, ops.vdist(center1, center2));
+}
+```
+
 More Reading: [https://github.com/penrose/penrose/wiki/Getting-started\#writing-new-objectivesconstraintscomputations](https://github.com/penrose/penrose/wiki/Getting-started#writing-new-objectivesconstraintscomputations)
 
