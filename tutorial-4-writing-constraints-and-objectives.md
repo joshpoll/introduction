@@ -14,13 +14,11 @@ We will start with understanding what, and how are constraints and objectives do
 
 ## Diagramming From A Technical Perspective
 
-Making a diagram can be encoded as an **optimization problem.** Parts of a diagram can be quantified using objectives and constraints. The lower the energy, the better that part of the diagram is. Local minima of the overall energy function correspond to diagrams that can't be improved by making any local adjustments. Often, in the process of diagramming, there is not just one good diagram, but many solutions--that is, there are many local minima of the energy function. Given a Style program, which defines an energy function for your family of diagrams, Penrose looks for a local minimum of the energy function by using numerical optimization.
+Making a diagram can be encoded as an **optimization problem.** Optimization broadly is the search for the best solution to a problem subject to certain rules. For example, finding the best way to arrange your day with all the tasks that you need to finish during a certain timeframe is an optimization. There are many different optimization techniques, and Penrose utilizes numerical optimization.
 
-Penrose utilizes numerical optimization in order to produce beautiful diagrams. We will explain what optimization is, followed by what numerical optimization is. 
+Numerical optimization uses functions that are called **energy functions** to quantify how good our current solution is. An energy function outputs a numerical value \(the energy\), hence _numerical_ optimization. A key thing to remember here is **we want to minimize the energy**, the lower the better. Under the hood, all constraint functions are implemented as energy functions. Furthermore, for Penrose, a good diagram means a diagram that satisfied all the objectives and constraints written in the program. Therefore,  a diagram can be quantified with the energy of all its constraints and objective functions. 
 
-Optimization broadly is the search for the best solution to a problem subject to certain rules. For example, finding the best way to arrange your day with all the tasks that you need to finish during a certain timeframe is an optimization. 
-
-The term numerical optimization is one kind of optimization, and a simple description is that we use some functions, that we call **energy functions**, to quantify how good our current solution is. The functions output a numerical value, hence _numerical_ optimization. Under the hood, **all constraint functions are implemented as energy functions**. 
+The energy of a diagram can take on a range of values, and there are 3 specific values we care about: Global Minimum, Local Minima, and Maxima. A diagram with a global minimum energy means it is a really good diagram, and it cannot be improved by making local changes. A diagram with a local minima energy is a pretty good diagram. A diagram with a maxima energy is a bad diagram. Often, in the process of diagramming, there is not just one good diagram, but many solutions — that is, there are many local minima of the energy function. Given a Style program, which defines an energy function for your family of diagrams, Penrose looks for a local minimum of the energy function by using numerical optimization.
 
 Lastly, we write energy functions in a particular way using **autodiff helper functions**, where autodiff stands for auto differentiation**.**  This is because Penrose takes the energy function's gradient $$\nabla$$, i.e. take the derivatives of the function, to find better and better solutions.  Fore more on optimization, here's a wonderful [introduction video](https://www.youtube.com/watch?v=sDAEFFoiKZ0).  
 
@@ -185,6 +183,22 @@ If you compare the two graphs above, you can see how we expanded the range of ex
 
 * Write a constraint that makes 2 circles disjoint from each other. Remember _disjoint_ means that the two circles do not overlap at all.
 * Write a new disjoint function that allows padding, i.e. minimum distance between two circles will be the padding value. 
+
+### Exercise Solutions
+
+```typescript
+disjoint: ([t1, s1]: [string, any], [t2, s2]: [string, any]) => {
+    const res = add(r1, r2);
+    return sub(res, ops.vdist(center1, center2));
+}
+```
+
+```typescript
+disjointPadding: ([t1, s1]: [string, any], [t2, s2]: [string, any], padding : number) => {
+    const res = add(add(r1, r2), constOf(padding));
+    return sub(res, ops.vdist(center1, center2));
+}
+```
 
 More Reading: [https://github.com/penrose/penrose/wiki/Getting-started\#writing-new-objectivesconstraintscomputations](https://github.com/penrose/penrose/wiki/Getting-started#writing-new-objectivesconstraintscomputations)
 
