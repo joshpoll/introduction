@@ -12,7 +12,9 @@ You are already equipped to create beautiful diagrams with what you have already
 
 We will start with understanding what, and how are constraints and objectives done in Penrose, and then we will go through several examples line by line to apply our conceptual understanding concretely. 
 
-## What is optimization for Penrose?
+## Diagramming From A Technical Perspective
+
+Making a diagram can be encoded as an **optimization problem.** Parts of a diagram can be quantified using objectives and constraints. The lower the energy, the better that part of the diagram is. Local minima of the overall energy function correspond to diagrams that can't be improved by making any local adjustments. Often, in the process of diagramming, there is not just one good diagram, but many solutions--that is, there are many local minima of the energy function. Given a Style program, which defines an energy function for your family of diagrams, Penrose looks for a local minimum of the energy function by using numerical optimization.
 
 Penrose utilizes numerical optimization in order to produce beautiful diagrams. We will explain what optimization is, followed by what numerical optimization is. 
 
