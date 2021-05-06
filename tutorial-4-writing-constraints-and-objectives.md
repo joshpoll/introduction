@@ -14,7 +14,7 @@ We will start with understanding what, and how are constraints and objectives do
 
 ## Diagramming From A Technical Perspective
 
-Making a diagram can be encoded as an **optimization problem.** Parts of a diagram can be quantified using objectives and constraints. The lower the energy, the better that part of the diagram is. Local minima of the overall energy function correspond to diagrams that can't be improved by making any local adjustments. Often, in the process of diagramming, there is not just one good diagram, but many solutions--that is, there are many local minima of the energy function. Given a Style program, which defines an energy function for your family of diagrams, Penrose looks for a local minimum of the energy function by using numerical optimization.
+Making a diagram can be encoded as an **optimization problem.** Parts of a diagram can be quantified using objectives and constraints. \*\*\*\*\*_**Need to introduce energy here\*\*\*\*\*\***_ The lower the energy, the better that part of the diagram is.  \*\*\*\*\*_**Need to introduce why we are mentioning local minima here\*\*\*\*\*\***_  Local minima of the overall energy function correspond to diagrams that can't be improved by making any local adjustments. Often, in the process of diagramming, there is not just one good diagram, but many solutions--that is, there are many local minima of the energy function. Given a Style program, which defines an energy function for your family of diagrams, Penrose looks for a local minimum of the energy function by using numerical optimization.
 
 Penrose utilizes numerical optimization in order to produce beautiful diagrams. We will explain what optimization is, followed by what numerical optimization is. 
 
