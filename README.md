@@ -6,7 +6,7 @@ description: >-
 
 # Home Page
 
-## ✨ Welcome, we are so glad you are here.
+## Welcome, we are so glad you are here.
 
 Ready to make some beautiful diagrams? Penrose is accessible for people with a variety of backgrounds including mathematical domain experts as well as people with no programming experiences.
 

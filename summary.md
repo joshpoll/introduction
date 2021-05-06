@@ -1,10 +1,10 @@
 # Summary
 
-Congratulation! You've completed all the tutorials that equips you to become a Penrose user, developer, domain expert, etc. 
+Congratulation! You've completed all the tutorials that equip you to become a Penrose user, developer, domain expert, etc. 
 
-We've come a far way from not knowing what makes a Penrose program, to being a Penrose developer, writing constraints and objectives that users can use. 
+We've come a long way from not knowing what makes a Penrose program to being a Penrose developer. We've learned about the basics of Penrose, what are predicates and constraints, how to write functions, and how to write our own constraints and objectives that we can use in diagrams.
 
-We hope you've had a fun time going through the tutorial and exercises just like how us when writing these tutorials. 
+We hope you've had a fun time going through the tutorials and exercises, and perhaps see diagramming differently. 
 
 For further explorations, here are some resources:
 
