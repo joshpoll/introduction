@@ -187,6 +187,7 @@ If you compare the two graphs above, you can see how we expanded the range of ex
 ### Exercise Solutions
 
 ```typescript
+/* d(c1, c2) + r1 + r2 >= 0 */
 disjoint: ([t1, s1]: [string, any], [t2, s2]: [string, any]) => {
     const res = add(t1.r.contents, t2.r.contents);
     return sub(res, ops.vdist(t1.center.contents, t2.center.contents));
@@ -194,6 +195,7 @@ disjoint: ([t1, s1]: [string, any], [t2, s2]: [string, any]) => {
 ```
 
 ```typescript
+/* d(c1, c2) + r1 + r2 >= padding */
 disjointPadding: ([t1, s1]: [string, any], [t2, s2]: [string, any], padding : number) => {
     const res = add(add(t1.r.contents, t2.r.contents), constOf(padding));
     return sub(res, ops.vdist(t1.center.contents, t2.center.contents));
