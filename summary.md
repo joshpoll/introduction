@@ -8,8 +8,9 @@ We hope you've had a fun time going through the tutorials and exercises, and per
 
 For further explorations, here are some resources:
 
-* More examples on complex diagrams: [LINK TO GITHUB](https://github.com/penrose/penrose/wiki/Example-diagrams)
-* _**\*\*\*\*\*\*\*\*\*MORE?\*\*\*\*\*\*\*\***_
+* More examples on complex diagrams: [LINK](https://github.com/penrose/penrose/wiki/Example-diagrams)
+* How the Style compiler works: [LINK](https://github.com/penrose/penrose/wiki/How-the-Style-compiler-works)
+* How to troubleshoot: [LINK](https://github.com/penrose/penrose/wiki/Troubleshooting)
 
 Have fun diagramming, and we will see you at future tutorials!
 
