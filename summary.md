@@ -11,6 +11,7 @@ For further explorations, here are some resources:
 * More examples on complex diagrams: [LINK](https://github.com/penrose/penrose/wiki/Example-diagrams)
 * How the Style compiler works: [LINK](https://github.com/penrose/penrose/wiki/How-the-Style-compiler-works)
 * How to troubleshoot: [LINK](https://github.com/penrose/penrose/wiki/Troubleshooting)
+* Check out the Penrose inspector for debugging \(some features like mod and drag are experimental at the moment\).
 
 Have fun diagramming, and we will see you at future tutorials!
 
