@@ -206,3 +206,10 @@ More Reading: [https://github.com/penrose/penrose/wiki/Getting-started\#writing-
 
 ## Take-aways
 
+In this tutorial, we took a leap from being users using the Penrose system to being developers contributing to the Penrose system. In particular, we learned the following things:
+
+* Diagramming can be encoded as an optimization problem, and Penrose uses numerical operations.
+* Constraints and objectives are implemented as energy functions, and the outputs of an energy function is called energy. 
+* The lower the energy, the better! A diagram with low energy for all of its constraints and objectives is a good diagram. 
+* To write an energy function, we use autodiff functions with special number types, and we write everything in functional style. 
+
