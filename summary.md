@@ -7,7 +7,7 @@ We've come a long way from not knowing what makes a Penrose program to being a P
 * Style, Substance, and Domain files make up a Penrose diagram. They are called a triple. 
 * We define a type of object in our domain. We define the substances in our diagram by declaring its type and its variable name. We define the styles using the syntax `forall TYPE_NAME x {}`.
 * We use the keyword `predicate` to define relationship between objects, the keyword `ensure` to define constraints on the diagram, and the keyword `function` to declare a function. 
-* The principals of styling in Penrose is we start by defining styles for base objects, cascade styles, and override if needed with the keyword `override`.
+* The principals of styling is we start by defining styles for base objects, cascade styles, and override if needed with the keyword `override`.
 * The visual meaning is in the style program, including all the concrete numerical things. Substance program is infinitely flexible. Nothing is built-in. Define your world in the domain file. Domain program is infinitely flexible. Nothing is built-in.
 * Penrose implements constraints & objectives with energy functions in order to optimize diagrams. 
 
