@@ -20,7 +20,7 @@ Numerical optimization uses functions that are called **energy functions** to qu
 
 The energy of a diagram can take on a range of values, and there are 3 specific values we care about: Global Minimum, Local Minima, and Maxima. A diagram with a global minimum energy means it is a really good diagram, and it cannot be improved by making local changes. A diagram with a local minima energy is a pretty good diagram. A diagram with a maxima energy is a bad diagram. Often in the process of diagramming, there is not just one good diagram, but many solutions — that is, there are many local minima of the energy function. Given a Style program, which defines an energy function for your family of diagrams, Penrose looks for a local minimum of the energy function by using numerical optimization.
 
-Lastly, we write energy functions in a particular way using **autodiff helper functions**, where autodiff stands for auto differentiation**.**  This is because Penrose takes the energy function's gradient $$\nabla$$, i.e. take the derivatives of the function, to find better and better solutions.  Fore more on optimization, here's a wonderful [introduction video](https://www.youtube.com/watch?v=sDAEFFoiKZ0).  
+Lastly, we write energy functions in a particular way using **autodiff helper functions**, where autodiff stands for auto differentiation**.**  This is because Penrose takes the energy function's gradient $$\nabla$$, i.e. take the derivatives of the function, to find better and better solutions.  For more on optimization, here's a wonderful [introduction video](https://www.youtube.com/watch?v=sDAEFFoiKZ0).  
 
 > In short, we write energy functions with a specific set of operations in order for Penrose to optimize, finding the best diagram for us.
 
@@ -106,7 +106,7 @@ Since we penalize the amount the constraint is greater than `0`. So, this constr
 
 ### 5. Negative Outputs of Energy Functions
 
-Previously, we've talked about how we convert everything to zero-based inequality, so what happens when the energy function outputs a negative value? It simply means that the constraint is satisfied. What actually happens is that Penrose takes the energy function outputs with a wrapper `f(x) = max(x, 0)` where `x`  is the energy, so all negative values will be regarded as satisfying the constraint. 
+Previously, we've talked about how we convert everything to zero-based inequality, so what happens when the energy function outputs a negative value? It simply means that the constraint is satisfied. What actually happens is that Penrose takes the energy function outputs with a wrapper `f(x) = max(x, 0)^2`  \($$f(x)=max(x, 0)^2)$$where `x`  is the energy, so all negative values will be regarded as satisfying the constraint. 
 
 ### 6. Accessing Shape Field Value
 
@@ -187,6 +187,7 @@ If you compare the two graphs above, you can see how we expanded the range of ex
 ### Exercise Solutions
 
 ```typescript
+/* d(c1, c2) + r1 + r2 >= 0 */
 disjoint: ([t1, s1]: [string, any], [t2, s2]: [string, any]) => {
     const res = add(t1.r.contents, t2.r.contents);
     return sub(res, ops.vdist(t1.center.contents, t2.center.contents));
@@ -194,6 +195,7 @@ disjoint: ([t1, s1]: [string, any], [t2, s2]: [string, any]) => {
 ```
 
 ```typescript
+/* d(c1, c2) + r1 + r2 >= padding */
 disjointPadding: ([t1, s1]: [string, any], [t2, s2]: [string, any], padding : number) => {
     const res = add(add(t1.r.contents, t2.r.contents), constOf(padding));
     return sub(res, ops.vdist(t1.center.contents, t2.center.contents));
@@ -201,4 +203,6 @@ disjointPadding: ([t1, s1]: [string, any], [t2, s2]: [string, any], padding : nu
 ```
 
 More Reading: [https://github.com/penrose/penrose/wiki/Getting-started\#writing-new-objectivesconstraintscomputations](https://github.com/penrose/penrose/wiki/Getting-started#writing-new-objectivesconstraintscomputations)
+
+## Take-aways
 
