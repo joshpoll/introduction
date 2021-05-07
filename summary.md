@@ -4,7 +4,7 @@ Congratulation! You've completed all the tutorials that equip you to become a Pe
 
 We've come a long way from not knowing what makes a Penrose program to being a Penrose developer. Here's a quick run down of some of what we learned:
 
-* Style, Substance, and Domain files make up a Penrose diagram.
+* Style, Substance, and Domain files make up a Penrose diagram. They are called a triple. 
 * We define a type of object in our domain. We define the substances in our diagram by declaring its type and its variable name. We define the styles using the syntax `forall TYPE_NAME x {}`.
 * We use the keyword `predicate` to define relationship between objects, the keyword `ensure` to define constraints on the diagram, and the keyword `function` to declare a function. 
 * The principals of styling in Penrose is we start by defining styles for base objects, cascade styles, and override if needed with the keyword `override`.
