@@ -1,79 +1,92 @@
----
-description: >-
-  The page with all the information on the tutorials that will help you diagram
-  with Penrose.
----
-
 # Home Page
 
 ## Welcome, we are so glad you are here.
 
-Ready to make some beautiful diagrams? Penrose is accessible for people with a variety of backgrounds including mathematical domain experts as well as people with no programming experiences.
+Ready to make some beautiful diagrams? Penrose is accessible to people coming from a variety of backgrounds including mathematical domain experts and individuals with no programming experience.
 
 ## Table of Contents
 
-In this page, we introduce Penrose's general approach and system, we will learn about how to install, how to think about diagramming, and what makes up a Penrose diagram.  The real fun begins when you dive into the series of tutorials we have prepared for you. If you already have the knowledge about what I just listed, feel free to skip this page and start your first tutorial. You can navigate through tutorials using the navigation bar on the left, and navigate  a single page using the navigation bar on the right. 
+In this section, we will cover installation instructions, introduce Penrose's general approach and system, talk about how to approach diagramming, and what makes up a Penrose diagram.  
 
-The sections build on top of each other, using the skillsets we've acquired in the previous exercises, therefore we highly recommend you to follow through the tutorials in order. Each individual part contains a detailed walk through of a particular example and several exercises for you to consolidate your knowledge.
+The real fun begins when you dive into the series of tutorials we have prepared for you. You can navigate through tutorials using the navigation bar on the left, and jump between sections of a single page using the navigation bar on the right. 
+
+Note that each tutorial builds on top of the last, so we highly recommend that you work through the tutorials in order. Each one contains a detailed walk-through of a particular example and several exercises for you to consolidate your knowledge.
 
 ## Introduction
 
-This section provides both concrete and conceptual understanding of how to work within the Penrose environment. Feel free to dive into tutorials if you are ready.
+This section provides both concrete and conceptual descriptions of how to work within the Penrose environment. Feel free to dive into tutorials if you are ready.
 
 ### Installation
 
 We have a detailed wiki page on how to get Penrose up and running on your computer [here](https://github.com/penrose/penrose/wiki/Building-and-running).🥳 Come back when you are done.
 
-After following the Building & Running page, you should now have your own directory to run your code. It might look something like this,
+After following the Building & Running page, navigate to the `code` folder within the `tutorial` folder. You should see a bunch of folders for each of the tutorials, and inside there should be three empty files \(and a file with the solutions\). The  partial file structure might look something like this \(a trailing `/` denotes a folder\):
 
-![initialize files](https://github.com/penrose/penrose/raw/docs-edit/assets/tutorial/intro/initializa_file.png)
+```text
+penrose/ (root of the repository)
+  - tutorial/
+    - code/
+      - tutorial1/
+        - setTheory.dsl
+        - twoSets.sub
+        - twoSets.sty
+      - tutorial2/
+        - ... etc.
+```
 
-Before getting into the granularity of code, a basic understanding of a Penrose program will make you feel less overwhelmed. Learning a new environment can be intimidating, and we want to make it as smooth as possible.
+Let's start with building up some intuition about how to approach Penrose. Learning how to use a new set of tools can be intimidating, and we want to make the process as smooth as possible.
 
-### How do we diagram by hand?
+### How do we create diagrams by hand?
 
-Now, for a second, I want you to recall how you would normally diagram a concept using a pen or pencil.
+Recall how you would normally create a diagram of a concept using a pen or pencil. It will most likely involve the following steps:
 
-It will most likely involve the following steps,
+**1. Decide what you are diagramming**
 
-* **Decide on what you are diagramming**
-  * There must be something that you want to diagram, so you are here pondering how to diagram it.
-  * Let's say we are making a diagram of things in your house, then the **domain** of objects that we are working with includes furnitures, plants, utensils, and everything that is in your house. Furthermore, furniture / plants / utensils are specific types of objects in your houses \(the domain\).
-* **Have a \(mental\) list of the objects you want to include in the diagram**
-  * We either write down, or mentally construct the list of objects that will be included in our diagram.
-  * They are the **substances** of our diagram that will be visualized.
-  * For example, your chair🪑 is a particular instance of an object in the domain🏠, and🪑 has the type of _furniture_. If the chair is in the diagram, then it is a substance of the diagram.
-* **Figure out the relationships between the objects**
-  * If we were only to put the list of things on paper one by one, that would not be an interesting nor useful diagram. Normally, there are relationships that we want to visualize.
-  * For example, we could group the plants based on the number of times they need to be watered on a weekly basis. Then we would have visual clusters of elements.
-* **Explore different visual styles**
-  * Drawings commonly require explorations and various attempts with colors, sizes, and compositions. The same concept can be visualized in a number of different **styles**.
+* Let's say we are making a diagram of things in your house. Then the **domain** of objects that we are working with includes everything that is in your house. Subsequently, any items that can be found in your house \(furniture, plants, utensils, etc.\) can be thought of as specific **types** of objects in your household domain.
 
-#### The process of creating a Penrose diagram is similar to our intuitive process of analogue diagramming.🎉
+**2. Make a list of the objects you want to include in the diagram**
+
+* We either write down or mentally construct a list of all the objects that will be included in our diagram. In Penrose terms, these objects are considered **substances** of our diagram.
+* For example, your chair🪑 is a particular instance of an object in the house domain 🏠. If the chair is in the diagram, then it is a substance of the diagram.
+
+**3. Figure out the relationships between the objects**
+
+* If we only put the list of items on paper one by one, that would not be a particularly interesting or useful diagram. Diagrams are more interesting when they visualize _relationships_.
+* For example, we could group the plants in your house based on the number of times they need to be watered on a weekly basis. Then we would have visual clusters of elements.
+
+**4. Explore different visual styles**
+
+* Drawings commonly require explorations and various attempts with colors, sizes, and compositions. The same concept can be visualized in a number of different **styles**.
+
+### The process of creating a Penrose diagram is similar to our intuitive process of analog diagramming.🎉
 
 ![chair in house &amp; vector in linear algebra](https://github.com/penrose/penrose/raw/docs-edit/assets/tutorial/intro/chair-vector.jpg)
 
-Let's circle back to what Penrose is meant to do: create beautiful diagrams from mathematical statements. The relationship between a chair being an object in a house, is the same as a vector being an object in Linear Algebra. With Penrose, you can build any mathematical domain with concepts that you wish to visualize.🖌️
+Let's circle back to what Penrose is meant to do: create beautiful diagrams from mathematical statements. If a chair is an object within a house, then it follows that a vector is also an object within Linear Algebra. With Penrose, you can build any mathematical domain with concepts that you wish to visualize.🖌️
 
-### What makes a Penrose program?
+### What makes up a Penrose program?
 
-It follows naturally from the process of diagramming by hand, we need to keep track of certain information as described above. The way we do that is by writing code in three specific files. First, we need to define our **domain** of objects because Penrose does not know what is in your house, or what a chair is. You need to define the types of objects and operations in your domain. For example, you can _push_ a chair, or _sit_ on a chair, which are operations related to a chair. Second, we need to store the specific **substances** we want to include in our diagrams, so Penrose knows exactly what to draw for you. Lastly, we need to define the **styles** that we want to visualize our substances in. Each of these corresponds to a specific file with an intuitive file extension designed for accessibility.
+As discussed above, it is important to keep track of any objects that we want to include in our Penrose diagram. The way we do that is by writing code in three specific files. 
 
-![Triple Diagram](https://github.com/penrose/penrose/raw/docs-edit/assets/tutorial/intro/triple_helvetica.png)
+* First, we need to define our **domain** of objects because Penrose does not know what is in your house or what a chair is. In addition to defining the types of objects in your domain, you will need to describe the possible operations in your domain. For example, you can _push_ a chair, or _sit_ on a chair, which are operations related to a chair. 
+* Second, we need to store the specific **substances** we want to include in our diagrams, so Penrose knows exactly what to draw for you. 
+* Lastly, we need to define the **styles** that we want to visualize our substances with. 
 
-Every Penrose program consists of 3 files:
+Each of these corresponds to a specific file with an intuitive file extension designed for accessibility:
 
 * A `.dsl` file that defines the language specific to the domain.
-* A `.sty` file that specifies the style of the visual representation.
 * A `.sub` file that creates substances of mathematical content.
+* A `.sty` file that specifies the style of the visual representation.
 
 > dsl stands for Domain Specific Language.
 
-In general, for each diagram, you will have an individual `.sub` file that contains the specific instances for the diagram, while the `.dsl` and `.sty` files can be applied to a number of different diagrams. For example, we can have various diagrams in the domain of Linear Algebra that visualizes different concepts with different `.sub` files, but we would have a main `linearAlgebra.dsl` file and maybe several `linearAlgebra.sty` file for different styles.
+![Introducing the .dsl, .sty, and .sub files that are the backbone of every Penrose program](https://github.com/penrose/penrose/raw/docs-edit/assets/tutorial/intro/triple_helvetica.png)
 
-Now, you are equipped to embark on your Penrose journey to make your first penrose diagram. But if you are curious about what we are going to make together, read on.
+In general, for each diagram, you will have a unique`.sub` file that contains the specific instances for the diagram, while the `.dsl` and `.sty` files can be applied to a number of different diagrams. For example, we could make several diagrams in the domain of Linear Algebra that each visualize different concepts with different `.sub` files, but we would preserve a main `linearAlgebra.dsl` file that describes the types and operations that are possible in Linear Algebra, and select from any of several possible `linearAlgebra.sty` files to affect each diagram's appearance.
 
-### Sneak peak of the tutorials
+Now, you are equipped to embark on your Penrose journey and make your first Penrose diagram! Here's a quick sneak peek of what we will be building in the following tutorials:
+
+### Sneak peek of the tutorials
 
 * Tutorial 1: Diagram containing 2 sets
 
