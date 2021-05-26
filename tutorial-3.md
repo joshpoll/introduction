@@ -145,7 +145,7 @@ layer u.text above U.xAxis
 layer u.text above U.yAxis
 ```
 
-🔥 Yes! We are halfway there. Now you should see something similar to the following diagram. If you want to check your code, you can find the solution here: [Complete code for drawing vector in vector space](https://github.com/penrose/penrose/blob/docs-edit/tutorial/code/tutorial3/complete-code/vector.sty#L69)
+🔥 Yes! We are halfway there. Now you should see something similar to the following diagram. If you want to check your code, you can find the solution here: [Solution](https://github.com/penrose/tutorials/blob/main/solutions/tutorial3.md). Look for the section in the `.sty` file marked with `tutorial walkthrough part 1`.
 
 ![Your new Penrose diagram should look something like this!](https://github.com/penrose/penrose/raw/docs-edit/assets/tutorial/part3/2vectors_wg.png)
 
@@ -174,9 +174,7 @@ where u := addV(v,w); In(u, U); In(v, U); In(w, U) {
 }
 ```
 
-This is easier than you expected, right? You're all done with this tutorial! Take a sip of water and come back to solidify your knowledge with the following exercises.🌴
-
-[Complete code for the example.](https://github.com/penrose/penrose/blob/docs-edit/tutorial/code/tutorial3/complete-code/vector.sty#L69)
+This is easier than you expected, right? You're all done with this tutorial! Take a sip of water and come back to solidify your knowledge with the following exercises.🌴 [Complete code for the example](https://github.com/penrose/tutorials/blob/main/solutions/tutorial3.md).
 
 ## Exercises
 
@@ -203,7 +201,7 @@ We follow the convention of `u` being the resultant vector, and use `v, w` for i
 
 ![Exercise 3 Goal](https://github.com/penrose/penrose/raw/docs-edit/assets/tutorial/part3/using/parallelogram.jpeg)
 
-[Sample Solutions](https://github.com/penrose/penrose/tree/docs-edit/tutorial/code/tutorial3/complete-code)
+[Sample Solutions](https://github.com/penrose/tutorials/blob/main/solutions/tutorial3.md)
 
 ## Takeaways
 

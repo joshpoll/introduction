@@ -1,36 +1,42 @@
 ---
-description: Learn How To Write Constraints & Objectives As A Penrose Developer
+description: Learn How to Write Constraints & Objectives as a Penrose Developer
 ---
 
 # Tutorial 4: Writing Constraints & Objectives
 
 ## Introduction
 
-We've been using constraints and objectives in our previous tutorials, and now we will begin writing our own constraints and objectives! Being able to write your own constraints and objectives is an important step in becoming an **advanced Penrose developer**. 
+We've already used constraints and objectives in our previous tutorials, and now we will begin writing some of our own! Being able to write your own constraints and objectives is an important step in becoming an **advanced Penrose developer**. 
 
-You are already equipped to create beautiful diagrams with what you have already learned from the previous tutorials as an user of the Penrose system, whereas with the knowledge from this tutorial, you will be __**extending the existing Penrose system**, contributing to the platform for many other users. 
+You are already equipped to create beautiful diagrams with what you have already learned from the previous tutorials. This tutorial will cover how you can __**extend the existing Penrose system**, contributing to the platform for many other users. 
 
-We will start with understanding what, and how are constraints and objectives done in Penrose, and then we will go through several examples line by line to apply our conceptual understanding concretely. 
+We will start by discussing how are constraints and objectives are done in Penrose, and then we will go through several examples to apply our conceptual understanding. 
 
 ## Diagramming From A Technical Perspective
 
-Making a diagram can be encoded as an **optimization problem.** Optimization broadly is the search for the best solution to a problem subject to certain rules. For example, finding the best way to arrange your day with all the tasks that you need to finish during a certain timeframe is an optimization. There are many different optimization techniques, and Penrose utilizes numerical optimization.
+Making a diagram can be encoded as an **optimization problem.** Broadly speaking, optimization is the search for the best solution to a problem subject to certain rules. For example, finding the best way to arrange your day with all the tasks that you need to finish during a certain timeframe is an optimization. There are many different optimization techniques, and Penrose utilizes **numerical optimization**.
 
-Numerical optimization uses functions that are called **energy functions** to quantify how good our current solution is. An energy function outputs a numerical value \(the energy\), hence _numerical_ optimization. A key thing to remember here is **we want to minimize the energy**, the lower the better. Under the hood, all constraint functions are implemented as energy functions. Furthermore, for Penrose, a good diagram means a diagram that satisfied all the objectives and constraints written in the program. Therefore,  a diagram can be quantified with the energy of all its constraints and objective functions. 
+Numerical optimization uses functions that are called **energy functions** to quantify how good our current solution is. An energy function outputs a numerical value \(the energy\), hence _numerical_ optimization. A key thing to remember here is **we want to minimize the energy**, the lower the better. Under the hood, all constraint functions are implemented as energy functions. In Penrose, a "good" diagram is one that satisfied all the objectives and constraints written in the program. Therefore, a diagram can be quantified with the energy of all its constraints and objective functions. 
 
-The energy of a diagram can take on a range of values, and there are 3 specific values we care about: Global Minimum, Local Minima, and Maxima. A diagram with a global minimum energy means it is a really good diagram, and it cannot be improved by making local changes. A diagram with a local minima energy is a pretty good diagram. A diagram with a maxima energy is a bad diagram. Often in the process of diagramming, there is not just one good diagram, but many solutions — that is, there are many local minima of the energy function. Given a Style program, which defines an energy function for your family of diagrams, Penrose looks for a local minimum of the energy function by using numerical optimization.
+The energy of a diagram can take on a range of values, and there are 3 specific values we care about: 
+
+* **Global minimum:** A diagram with a global minimum energy means it is a really good diagram, and it cannot be improved by making local changes. 
+* **Local minima:** A diagram with a local minima energy is "pretty good".
+* **Maxima:** A diagram with a maxima energy is a bad diagram. Remember, we want to minimize energy, so hitting a maxima through the optimizing process is not good.
+
+Often in the process of diagramming, there is not just one good diagram, but many solutions — that is, there are many local minima of the energy function. Given a Style program, which defines an energy function for your family of diagrams, Penrose looks for a **local minimum** of the energy function by using numerical optimization.
 
 Lastly, we write energy functions in a particular way using **autodiff helper functions**, where autodiff stands for auto differentiation**.**  This is because Penrose takes the energy function's gradient $$\nabla$$, i.e. take the derivatives of the function, to find better and better solutions.  For more on optimization, here's a wonderful [introduction video](https://www.youtube.com/watch?v=sDAEFFoiKZ0).  
 
-> In short, we write energy functions with a specific set of operations in order for Penrose to optimize, finding the best diagram for us.
+> In short, we write energy functions with a specific set of operations for Penrose to optimize, allowing it to find the best diagram for us.
 
 ## Conceptual: How To Come Up With Constraints?
 
-In the normal world, when we want a circle A contained in another circle B, this is normally what comes into our mind.
+Let's say we want to create a diagram that represents the mathematical idea of _contaiment_. If we wanted a circle `A` to be contained in another circle `B`, this is probably what comes to mind:
 
 ![](.gitbook/assets/mentalpicture.png)
 
-We have a mental picture of what _containment_  means to us, but there is no way for us to transfer this mental picture directly to the Penrose system and say, "Okay this is what we want when we write  `isContained(A, B)`". Therefore we need to pause for a second, and **really** think about what does it meant for a circle to be contained in another circle mathematically. 
+So we have a mental picture of what _containment_  means to us, but there is no way for us to transfer this mental picture directly to the Penrose system and say, "Okay this is what we want when we write  `isContained(A, B)`". Therefore we need to pause for a second, and really think about what it means for a circle to be contained in another circle mathematically. 
 
 There are generally 3 scenarios for the containment relationship between 2 circles. 
 
@@ -38,79 +44,93 @@ There are generally 3 scenarios for the containment relationship between 2 circl
 
 We have completely **contained**, **overlapping** but not contained, and completely **disjoint**. Disjoint means none of the points in circle A is also in circle B, i.e. they do not overlap at all.
 
-The three scenarios are visually obvious to us. We get showed 2 circles, and in a split second, we can identify their relationship. Unfortunately, Penrose does not have eyes,  but good news is, _it speaks math!_ Therefore, let's take a new look at these circles.
+The three scenarios are visually obvious to us. We are shown 2 circles, and we can immediately identify their relationship. While Penrose does not have eyes, _it speaks math!_ So, let's try looking at these circles a different way.
 
 ![](.gitbook/assets/w_cent_rad.png)
 
-Recall the general equation for a circle where $$p$$ is some point, $$c$$ is the center and $$r$$ is the radius: $$||p-c||=r$$. This equation is in vector form since Penrose supports vectors and we prefer working with vectors instead of separate  $$x, y$$.
+Recall the general equation for a circle where $$p$$ is some point, $$c$$ is the center and $$r$$ is the radius: $$||p-c||=r$$. This equation is in vector form since Penrose has built-in vector support so we prefer working with them when possible.
 
-The center coordinate and radius are the information we have about **any** circle, and we will use these information to determine two circle's containment relationship. 
+The center coordinate and radius are the information we have about **any** circle, and we will use this information to determine two circle's containment relationship. 
 
 ![](.gitbook/assets/distance.png)
 
-Another information we will be using is the distance $$d$$ between the radii. Notice how the distance is progressively bigger as $$A$$ and $$B$$ are more disjoint. When $$A, B$$ are disjoint, we see that $$d$$'s value is the greatest. 
+Another piece of information we will be using is the distance $$d$$ between the radii. Notice how the distance gets progressively bigger as $$A$$ and $$B$$ become more disjoint. When $$A, B$$ are disjoint, we see that $$d$$'s value is the greatest. 
 
 Let's see a scenario when a circle is perfectly contained in another one. 
 
 ![Perfect Containment Example](.gitbook/assets/k_contain.png)
 
-Circle 1 contains circle 2 if and only if circle 1's radius is greater than the distance between their centers, plus circle 2's radius, i.e. $$r_1 > d+r_2$$. This diagram shows the most illustrative case when Circle 2 is just contained, which we can understand by intuitively reasoning about the directions of change for each degree of freedom. 
+Circle 1 contains circle 2 if and only if circle 1's radius is greater than the distance between their centers, plus circle 2's radius, i.e. $$r_1 > d+r_2$$. This diagram shows the most illustrative case when Circle 2 is _just_ contained, which we can understand by intuitively reasoning about the directions of change for each degree of freedom:
 
-* If $$r_2$$ is any smaller, clearly Circle 2 remains contained. If $$r_2$$ is any larger, clearly Circle 2 is no longer contained. 
-* If $$d$$ is any smaller, then clearly Circle 2 remains contained; if $$d$$ is any larger, then Circle 2 is no longer contained. 
-* If $$r_1$$ is any larger, then clearly Circle 2 remains contained; if $$r_1$$ is any smaller, then Circle 2 is no longer contained. 
-* Then by pushing variables, we can arrive at the energy expression $$d - (r1 - r2) < 0$$. 
+* If $$r_2$$ is any smaller, Circle 2 remains contained. If $$r_2$$ is any larger, clearly Circle 2 is no longer contained. 
+* If $$d$$ is any smaller, then Circle 2 remains contained; if $$d$$ is any larger, then Circle 2 is no longer contained. 
+* If $$r_1$$ is any larger, then Circle 2 remains contained; if $$r_1$$ is any smaller, then Circle 2 is no longer contained. 
 
-Here's a short little proof. Read on if you are still a bit hesitant. Let $$r_{difference}=r_B-r_A$$.
+So, by rearranging the containment expression, we arrive at the energy expression $$d - (r1 - r2) < 0$$. 
 
-* We know $$r_{difference}<0$$ when $$r_A > r_B$$, i.e. radius of the circle A \(that we want to be contained\) is greater than the radius of circle B, and in that case, A cannot be contained by B. Then we have $$d-r_{difference}>d$$.
+Here's a short proof. Read on if you are still a bit hesitant. Let $$r_{difference}=r_B-r_A$$.
+
+* We know $$r_{difference}<0$$ when $$r_A > r_B$$, i.e. radius of the circle A \(that we want to be contained\) is greater than the radius of circle B. In that case, A cannot be contained by B. Then we have $$d-r_{difference}>d$$.
 * We have $$r_{difference} = 0$$ when $$r_A = r_B$$, i.e. the radii of the two circles are equal, and they can be contained in each other if and only if distance $$d=r_B=r_A$$ , then $$d-r_{difference}=d$$.
 * We have $$r_{difference}>0$$ when $$r_A < r_B$$, i.e. $$A$$ is a smaller circle than $$B$$. In that case $$A$$ is perfectly containable, and $$d-r_{difference} < d$$.
-* As shown above, we can conclude that the more contained circle $$A$$ is inside circle $$B$$, the smaller the value of $$d-r_{difference}$$.
+* As shown above, we can conclude that as circle $$A$$ becomes more contained within circle $$B$$, the value of $$d-r_{difference}$$ decreases accordingly.
 
 ## Concrete: How We Write Constraints
 
-With our Penrose triple, the syntax is most likely familiar to you from your prior programming experiences, but with constraints, we will be writing code in a particular way that allows Penrose to use a particular technique called **automatic differentiation,** _**autodiff**_ ****for short. The Penrose system uses autodiff to find the optimized diagram. For more on autodiff, read [here](https://github.com/penrose/penrose/wiki/Autodiff-guide#introduction). 
+The syntax for writing a constraint works in a way that allows Penrose to use a particular technique called **automatic differentiation,** _**autodiff**_ ****for short. The Penrose system uses autodiff to find the optimized diagram. For more on autodiff, read [here](https://github.com/penrose/penrose/wiki/Autodiff-guide#introduction). 
 
-There are several key rules and tricks we use when writing constraints. 
+### 1. The Autodiff Code is Built in Typescript
 
-### 1. Autodiff functions
+Unlike the previous tutorials where we were working with file triples in the custom Penrose language, this part of Penrose is fundamentally built in Typescript. As you will see, there are still some key rules and tricks to follow when writing constraints for autodiff.
 
-We enter this new world without our normal operations such as `+`  and `-`. Instead of what we normally can do across different languages such as javascript, python or c, we now have to use special number types and operations. 
+### 2. Autodiff Functions
 
-But no worries, it's straightforward. We have unary, binary, trinary, n-ary, and composite operations. The list of autodiff functions can be found [here](https://github.com/penrose/penrose/wiki/Autodiff-guide#to-use-the-autodiff). For example, instead of `a + b`, we now do `add(a, b)`.  The composite operations are accessed through `ops.functionName`.
+In order to perform automatic differentiation, Penrose needs to keep track of the operations that are performed on all numbers in an internal graph-based format. As a result, we have to make use of pre-defined Penrose operators and shift away from native Typescript operations such as `+` and `-`.
 
-### 2. Special Number Types
+We have unary, binary, trinary, n-ary, and composite operations. The terms unary, binary, etc. refer to the number of objects that are passed into the operation. For example, instead of `a + b`, we now write `add(a, b)`, which is a _binary_ operator because it takes two inputs, `a` and `b`. 
 
-All numbers need to actually be special types called `VarAD`  to be valid inputs for the autodiff functions. We can convert to and from normal numbers and `VarAD` using the functions `varOf: number -> VarAD` and `constOf: number -> VarAD` , and `numOf: VarAD -> number`, where the type `number` is our common const number values like `1, 2, 3, ...`.
+The composite operations are accessed through `ops.<function-name>`. For example, to access the `dist` operator to find the distance between two points expressed in vector form \(say `A` and `B`\), we'd write `ops.dist(A, B)`.
 
-For example, if we need to do `5 + 3` , the equivalent autodiff expression is `add(constOf(5), constOf(3))` or `add(varOf(5), varOf(5))`. 
+The full list of autodiff functions can be found [here](https://github.com/penrose/penrose/wiki/Autodiff-guide#to-use-the-autodiff).
 
-### 3. Write functional code
+### 3. Special Number Types
 
-We must write these functions in _straight-line functional style_ \(i.e. no imperative style, no mutating state, no for-loops or if statements\). These restrictions are so the Penrose system can work its magic. Therefore we need to avoid writing things like `x = x + 1`  which translates to `let x = add(x, constOf(1))`  in autodiff code, and instead use constant intermediate variables like this: `const x0 = ... const x1 = add(x0, constOf(1))`. 
+All numbers are required to be a special type called `VarAD`  in order to be valid inputs for autodiff functions. We can convert between normal numbers and `VarAD` using the functions:
 
-### 4. Zero-based inequality to energy function
+* `varOf: number -> VarAD` or `constOf: number -> VarAD`  to convert from a `number` to a `VarAD`. These two functions are interchangeable.
+* `numOf: VarAD -> number` to convert from a `VarAD` to a `number`.
 
-For every constraint function we write, we take in shapes and output a number or a tensor as penalty. In short, Penrose will try to minimize the outputs of all the constraint functions used for the diagram. 
+The type `number` represents our common, constant numerical values like `1, 2, 3, ...`. For example, if we need to do `5 + 3` , the equivalent autodiff expression is `add(constOf(5), constOf(3))` or `add(varOf(5), varOf(5))`. 
 
-When we write a constraint, for example, we want to constrain one circle `s1` to be smaller than another circle `s2` by some amount `offset`. In math, we would require that `r1 - r2 > offset`. An inequality constraint needs to be written in the form `p(x) > 0`.  
+### 4. Write Functional Code
 
-Since we penalize the amount the constraint is greater than `0`. So, this constraint is written as `r1 - r2 - offset > 0`, or `p(r1, r2) = r1 - r2 - offset`. 
+We must write these functions in _straight-line functional style_ \(i.e. no imperative style, no mutating state, no for-loops or if statements\). We do this so that the Penrose system can work its magic. We need to avoid writing things like `x = x + 1`  which translates to `let x = add(x, constOf(1))`  in autodiff code, and instead use constant intermediate variables like this: 
+
+```typescript
+const x0 = constOf(1)
+const x1 = add(x0, constOf(1))
+```
+
+### 5. Zero-Based Inequality to Energy Function
+
+For every constraint function we write, we take in shapes and output either a number or a [tensor](https://simple.wikipedia.org/wiki/Tensor) as a penalty. In short, Penrose will try to minimize the outputs of all the constraint functions used for the diagram. 
+
+When we write a constraint, for example, we want to constrain one circle `s1` to be smaller than another circle `s2` by some amount `offset`. In math, we would require that `r1 - r2 > offset`. An inequality constraint needs to be written in the form `p(x) > 0` since we penalize the amount the constraint is greater than `0`. So, this constraint is written as `r1 - r2 - offset > 0`, or `p(r1, r2) = r1 - r2 - offset`. 
 
 #### Some general rules on writing energy function: 
 
-* Let's say I want the constraint `f(x) <= c` to be true.
-* I translate it to the zero-based inequality `f(x) - c <= 0`.
-* I translate the inequality constraint into an energy \(penalty\) `E(x) = f(x) - c` — it is greater than `0` iff the constraint is violated, and the more the constraint is violated, the higher the energy is \(e.g. if `f(x)` is way bigger than `c` then the energy is a lot bigger than `0`\). 
+Let's say I want the constraint `f(x) <= c` to be true.
 
-### 5. Negative Outputs of Energy Functions
+1. Translate it to the zero-based inequality `f(x) - c <= 0`.
+2. Translate the inequality constraint into an energy \(aka penalty\) `E(x) = f(x) - c`, it is greater than 0 if and only if the constraint is violated. The more the constraint is violated, the higher the energy \(i.e. if `f(x)` is much larger than `c` then the energy `E(x)` is also larger than `0`\).
 
-Previously, we've talked about how we convert everything to zero-based inequality, so what happens when the energy function outputs a negative value? It simply means that the constraint is satisfied. What actually happens is that Penrose takes the energy function outputs with a wrapper `f(x) = max(x, 0)^2`  \($$f(x)=max(x, 0)^2)$$where `x`  is the energy, so all negative values will be regarded as satisfying the constraint. 
+### 6. Negative Outputs of Energy Functions
 
-### 6. Accessing Shape Field Value
+Previously, we've talked about how we convert everything to zero-based inequality, so what happens when the energy function outputs a negative value? It simply means that the constraint is satisfied.
 
-One common operation is to access the parameter of the shape, which is done via `shapeName.propertyName.contents`, which will return a `VarAD`.  For example, if you had a circle `c` as input, and you want its radius, doing `c.r.contents` will give you something like `5.0` \(wrapped in a `VarAD`\).
+### 6. Accessing a Value of a Shape's Field
+
+One common operation is to access the parameter of a shape via `shapeName.propertyName.contents`, which will return a `VarAD`.  For example, if you have a circle `c` as input, and you want its radius, `c.r.contents` will give you something like `5.0` \(of type `VarAD`\).
 
 ## Constraints Example: minSize & maxSize
 
@@ -125,42 +145,44 @@ minSize: ([shapeType, props]: [string, any]) => {
 
 Here we see several things in play. 
 
-* **Input:** The function takes in the shape, which is represented by a string of its shape name, which would be `"Circle"` in this case, and a `prop` which contains the properties of the circle. 
-* **Numbers:** Instead of directly using constant numbers `20`, we have to use `constOf(limit)` in order to pass it as a valid input for the autodiff function.
+* **Input:** The function takes in the shape, which is represented by a string of its shape name, `"Circle"` in this case, and a `prop` which contains the properties of the circle. 
+* **Numbers:** Instead of directly using constant numbers like `20`, we have to return `constOf(limit)` in order to pass it as a valid input for the autodiff function.
 * **Operations:** Instead of using the subtraction operator `-` like we normally do, we have to use the autodiff function `sub` .
-* **Accessing Shape Property:** We access the shape's property value by `shapeName.propertyName.contents` , where we have `propertyName = r` for radius. 
-* **Logic:** We want the input circle to have a minimum size as the function name suggests, and remember with these functions, and we want to minimize whatever value we return. For example, with a bad small circle with a radius of 1, we will return 19, whereas with a good big circle with a radius of 30, we will return -10, which is a negative number, thus satisfying the constraint. 
+* **Accessing the Shape Property:** We access the shape's property value by `shapeName.propertyName.contents` , where `propertyName = r` for radius in this case. 
+* **Logic:** We want the input circle to have a minimum size \(at least `r = 20`\) as the function name suggests, so we want to express our returned answer in terms of energy, where `energy > 0` is bad \(the constraint is unsatisfied\), and `energy <= 0` is good \(the constraint is satisfied\). For example, with a small circle of `r = 1`, we will return 19 \(not good\), whereas with a big circle of `r = 30`, we will return -10, a negative number that satisfies the constraint. 
 
 ```typescript
 import { canvasSize } from "renderer/ShapeDef";
 
 maxSize: ([shapeType, props]: [string, any]) => {
-    const limit = Math.max(...canvasSize);
+    const limit = Math.max(...canvasSize); /* ... = "spread" operator in Typescript */
     return sub(props.r.contents, constOf(limit / 6.0));
 }
 ```
 
-The function `maxSize` is very similar to `minSize` plus using a global variable `canvasSize` that is the size of the canvas, which we use as a limit of our circle's radius. It is divided by `6.0` as you can imagine, if we simply constraint the radius by `canvasSize`, we can have a circle with a radius of `canvasSize`, which can cover the entire canvas and we don't want that. You can feel free to play around with the amount you divide by, but `6.0` has proven to work pretty well. 
+The function `maxSize` is very similar to `minSize` with the addition of a global variable `canvasSize` which indicates the size of the canvas. We use this to limit our circle's radius. It is divided by `6.0` so that the circle does not cover the entire canvas. You can feel free to play around with the amount you divide by, but `6.0` has worked pretty well.
 
-## Objectives Example: circle repel
+## Objectives Example: Circle Repel
 
-With objectives, we want them to output the "badness" of the inputs \(as a number or Tensor\), and have local minima where we want the solution to be.
+Unlike constraints, which are binary in that they are either satisfied \(`<=0`\) or unsatisfied \(`>0`\), objective functions should output the "badness" of the inputs \(as a number or Tensor\), and have **local minima** where we want the solution to be.
 
-Now we look at an objective that makes two circles repel, i.e. encouraging the two circles to be far apart from each other. 
+Now we look at an objective that makes two circles repel, encouraging the two circles to stay far away from each other. 
 
 ```typescript
-repel: ([t1, s1]: [string, any], [t2, s2]: [string, any],
-                                       weight = 10.0) => {
+repel: ([t1, s1]: [string, any], [t2, s2]: [string, any], weight = 10.0) => {
     const repelWeight = 10e6;
     let res = inverse(ops.vdistsq(s1.center.contents, s2.center.contents));
     return mul(res, constOf(repelWeight));
 }
 ```
 
-We will look at this code together step by step,
+Let's look at this code together step by step:
 
-* **Input:** The function takes in similar inputs as the constraint functions we've just looked at, where for convenience, instead of `shapeType` we are simply using `t`. For the last input `weight`, `repel` typically needs to have a weight multiplied since its magnitude is small. 
-* **Operations:** Here we use 3 autodiff functions, `inverse`, `mul`, and `ops.vdistsq.`The `mul` function does multiplication,  `inverse(v)` function returns `1 / v` and `ops.vdistsq(v, w)` returns the Euclidean distance squared between vectors `v` and `w`. Remember `ops` is for composite functions that work on vectors. 
+* **Input:** The function takes inputs similar to the constraint functions we just looked at, where for convenience, we substituted in `t` for `shapeType`. We add a parameter, `weight`, which is present because `repel()` typically needs to have a weight multiplier since its magnitude is small. 
+* **Operations:** Here we use 3 autodiff functions:
+  *  `inverse`, which returns `1 / v` 
+  * `mul` performs multiplication 
+  * `ops.vdistsq` returns the squared Euclidean distance between vectors `v` and `w`. Remember we use`ops` to access composite functions that work on vectors. 
 * **Logic:** We will convert the math done in the second line of the function  to its corresponding mathematical equation.
 
 $$
@@ -171,7 +193,7 @@ So essentially, the `repel` function takes in two circles and returns the invers
 
 ![Graph of 1/x^2 from Desmos](.gitbook/assets/1-x-2-graph.png)
 
-If you look at the graph of $$f(x)=\frac{1}{x^2}$$, notice how the smaller $$d$$ is, the greater the output is, i.e. the **higher** penalty value we return. We  punish them for how close they are since we want to push them apart from each other.  We block the negative horizontal range since our input $$d$$ will never be negative. 
+If you look at the graph of $$f(x)=\frac{1}{x^2}$$, notice how the output increases as $$d$$ decreases, i.e. the **higher** penalty value we return. We block the negative horizontal range since we cannot have negative distances.
 
 We then return the value above multiplied by the `repelWeight`, and let's take a look at the graph of $$\frac{10e6}{x^2}$$.
 
@@ -182,7 +204,7 @@ If you compare the two graphs above, you can see how we expanded the range of ex
 ## Exercises
 
 * Write a constraint that makes 2 circles disjoint from each other. Remember _disjoint_ means that the two circles do not overlap at all.
-* Write a new disjoint function that allows padding, i.e. minimum distance between two circles will be the padding value. 
+* Write a new disjoint function that allows padding, i.e. the minimum distance between two circles will be the padding value. 
 
 ### Exercise Solutions
 
@@ -202,11 +224,11 @@ disjointPadding: ([t1, s1]: [string, any], [t2, s2]: [string, any], padding : nu
 }
 ```
 
-More Reading: [https://github.com/penrose/penrose/wiki/Getting-started\#writing-new-objectivesconstraintscomputations](https://github.com/penrose/penrose/wiki/Getting-started#writing-new-objectivesconstraintscomputations)
+More Reading: [link](https://github.com/penrose/penrose/wiki/Getting-started#writing-new-objectivesconstraintscomputations).
 
-## Take-aways
+## Takeaways
 
-In this tutorial, we took a leap from being users using the Penrose system to being developers contributing to the Penrose system. In particular, we learned the following things:
+In this tutorial, we took a leap from being users of the Penrose system to being developers contributing to the Penrose system. In particular, we learned the following things:
 
 * Diagramming can be encoded as an optimization problem, and Penrose uses numerical operations.
 * Constraints and objectives are implemented as energy functions, and the outputs of an energy function is called energy. 
