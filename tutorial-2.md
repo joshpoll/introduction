@@ -1,32 +1,36 @@
 ---
-description: Learn How To Use Predicates & Constraints
+description: How to Use Predicates & Constraints
 ---
 
 # Tutorial 2: Predicates & Constraints
 
-In Penrose, we are not only given the power to represent mathematical objects with shapes, but we are also able to represent complicated relationships between the objects. In this tutorial, we will learn about defining `predicate` and visually represent `predicate` with the constraint keyword `ensure`. After this tutorial, you should be equipped to diagrams relationships between objects with Penrose.
+In Penrose, we are not only given the power to represent mathematical objects with shapes, but we are also able to represent complicated relationships between the objects. In this tutorial, we will learn about defining **predicates,** and visually representing them with the constraint keyword `ensure`. After this tutorial, you should be equipped to create diagrams with relationships between objects in Penrose.
+
+The starter code for this tutorial can be found in the `./code/tutorial2` folder of the `tutorial` you cloned in part 1. 
 
 ## Goal
 
 ![Goal Diagram for Part 2](https://github.com/penrose/penrose/raw/docs-edit/assets/tutorial/part2/goal.svg)
 
-In the second example, we will work to diagram the relationship of a set is a **subset** of the other. The common way to visually represent A is a subset of B is by drawing A as a smaller circle that is fully contained in the circle that represents B. For those who doesn't know what a subset is, a short explanation would be A is a subset of B if and only if all the elements in A are in B. For example, the set of erasers would be a subset of the set of stationeries, since every single eraser is a stationary, thus being contained in the set of stationeries.
+In the second example, we will work to diagram a set that is a **subset** of another, i.e. `A is a subset of B`. Recall that  A is a subset of B if and only if all the elements in A are in B. For those who are not familiar with subsets, you can think of apples as a subset of fruit, because every apple is a fruit. In diagrams, the subset relationship is commonly represented by drawing A as a smaller circle that is fully contained in the circle that represents B.
 
 ## 📄 Domain
 
-To illustrate the subset relationship, we have to expand our domain file to let Penrose know that an arbitrary set can be a subset of another arbitrary set. Remember in last example, we defined objects of type `Set` using `type Set`, and now we want to define a _**relationship**_ between two sets.
+To illustrate the subset relationship, we have to expand our domain file to let Penrose know that an arbitrary set can be a subset of another arbitrary set. Recall that in Tutorial 1 we defined `Set` objects using `type Set`, and now we want to define a _**relationship**_ between two sets.
 
 To define a relationship between objects in the domain, there are a few things we need to decide on:
 
-* Name of the relationship
-* Numbers of arguments, i.e. how many objects are involves in this relationship
-* The type of arguments, i.e. what are the type of objects that are involes in this relationship
+* The name of the relationship
+* The number of arguments, i.e. how many objects are involved in this relationship
+* The type of arguments, i.e. what are the type of objects that are involved in this relationship
 
-The syntax for declaring a relationship is through the use of keyword `predicate`, and then inputting the necessary information to construct the predicate,
+The syntax for declaring a relationship is through the use of keyword `predicate`, the name of the predicate, and the objects that are involved in the predicate:
 
 ![predicate syntax](https://github.com/penrose/penrose/raw/docs-edit/assets/tutorial/part2/predicateSyntax.png)
 
-For our relationship, it follows naturally that the name should be `IsSubset`, and we have 2 arguments of type `Set`.
+This pattern informs Penrose that there is a relationship that we care about called `IsR` which takes arguments of type `t1` and `t2`. Penrose still doesn't know how to visually represent this relationship, so we will have to define that logic in our `.sty` file a little later.
+
+In the case of our current example, we can name our relationship `IsSubset`, and we have 2 arguments of type `Set`.
 
 {% code title="setTheory.dsl" %}
 ```typescript
@@ -35,15 +39,21 @@ predicate IsSubset : Set s1 * Set s2
 ```
 {% endcode %}
 
-Now we are free to use the predicate `IsSubset` in our `.sub` and define what it means visually in our `.sty`.
+Now we are free to use the predicate `IsSubset` in our `.sub` file and define what it means visually in our `.sty` file.
 
 ## 📄 Substance
 
-In our goal diagram, we have 3 sets, therefore we will declare 3 different sets in our `.sub`. Note that how we declared two sets in separate lines in the previous example, and another way to declare multiple objects with the same type would be `Set A, B, C`, where we first declare the type of objects follows by a list of variable names separated by commas. `Set A, B, C` is the equivalent of
+In our goal diagram, we have 3 sets, therefore we will declare 3 different sets in our `.sub` file. Note that in the previous example we declared each of our sets on separate lines, but we could also declare multiple objects of the same type in a single line. For instance, `Set A, B, C` is equivalent to writing:
 
-Then we want to declare the relationship between the sets.
+```text
+Set A
+Set B
+Set C
+```
 
-{% code title=".sub" %}
+So, we declare the set objects that will appear in our diagram, then we declare the relationship between the sets. In this case, let's make `B a subset of A` and `C a subset of B`.
+
+{% code title="subset.sub" %}
 ```typescript
 Set A, B, C
 IsSubset(B, A)
@@ -53,19 +63,19 @@ IsSubset(C, B)
 
 ## 📄 Style
 
-The style program will be the most complex part, and you will see that it is normally this way developing with Penrose. In this example, we introduce a new keyword `ensure`, which allows you to constrain certain aspects of certain shapes. Essentially, we use `ensure` to let Penrose know that these are rules the diagram **must** satisfy. Hence, we also call `ensure` statements _constraints_.
+The style program will be the most complex part, and you find that this is expected when developing with Penrose. In this example, we introduce a new keyword `ensure`, which allows you to constrain certain aspects of certain shapes. Essentially, we use `ensure` to let Penrose know that these are rules the diagram **must** satisfy. Hence, we also call `ensure` statements _constraints_.
 
-Recall that we learned about predicates that are defined in `.dsl` and used in `.sub`, and now we need to define the visual definition of the predicate. To show that A is a subset of B, we need the following visual characteristics:
+Recall that we learned about predicates that are defined in `.dsl` and used in `.sub`, and now we need to define the visual definition of the predicate. To show that `A is a subset of B`, we need the following visual characteristics:
 
 * A's circle needs to be smaller than B's circle
-* A's circle needs to be contained within B'c circle \(their borders should not be intersecting in any way\)
+* A's circle needs to be contained within B's circle \(their borders should not be intersecting in any way\)
 * A's circle is on top of B's circle
 
-Therefore we call the corresponding `ensure` functions on the `.icon` fields \(that we used to define the shape of objects in tutorial part 1\) of two arbitrary sets that have the relationship of `IsSubset`.
+Therefore we call the corresponding `ensure` functions on the `.icon` fields \(that we used to assign shape objects to in tutorial 1\) of two arbitrary sets that have the relationship of `IsSubset`.
 
-Now our selector is not just `forall Set A` since we only want to apply these styling rules to the sets that have the relationship `isSubset`, therefore we need to condition on the arbitrary sets we are looping through in the program with the keyword `where HasRelationshipR(A, B)` where the `HasRelationshipR` is `IsSubset` for this particular case.
+Now our selector is not just `forall Set A` since we only want to apply these styling rules to the sets that have the relationship `isSubset`. Therefore, we need to add a condition to the arbitrary sets we are looping through in the program. We can do this with the pattern `where HasRelationshipR(A, B)` where the `HasRelationshipR` is `IsSubset` in this particular case. Now our `.sty` file looks like this:
 
-{% code title=".sty" %}
+{% code title="subset.sty" %}
 ```typescript
 forall Set A; Set B
 where IsSubset(A, B) {
@@ -76,15 +86,15 @@ where IsSubset(A, B) {
 ```
 {% endcode %}
 
-Notice that in our first example, we did not care about the size of our shapes, but now we do care about the size since we want specific hiearchy of sizes, and in the process of forcing containments of the circles, the circles can get _**TOO BIG**_ or _**TOO SMALL**_. So we need to specify a range of acceptable sizes for our circles so nothing goes crazy.
+`smallerThan()` and `contains()` are a couple of the built-in constraints pre-defined by Penrose. A full list of available constraints is available in the `constrDict` object documentation [here](https://penrose.github.io/penrose/modules/_contrib_constraints_.html#constrdict).
 
-![no ensures leads to trouble](https://github.com/penrose/penrose/raw/docs-edit/assets/tutorial/part2/no_ensures.png)
+Notice that in our first example, we did not care about the size of our shapes, but now we want to maintain a specific hierarchy between objects. While Penrose tries to satisfy all constraints, it is possible for the circles to become too big or too small. So we need to specify a range of acceptable sizes for our circles so nothing goes crazy.
 
-This is what might happen when you don't constrain the sizes.👿
+![This is what might happen when you don&apos;t constrain the sizes.&#x1F47F;](https://github.com/penrose/penrose/raw/docs-edit/assets/tutorial/part2/no_ensures.png)
 
-Since we care about the sizes of **all** the sets, and need to **ensure** all of their sizes are within a reasonable range, we will again make use of our newly introduced keyword `ensure`. We call `ensure` on the fields of the object we want to make sure that are within reasonable range. Since we want to constrain the size of the shapes, we call `ensure MinSize(x.icon)` and `ensure maxSize(x.icon)`.
+Since we care about the sizes of **all** the sets and we need to **ensure** all of their sizes are within a reasonable range, we will again make use of our newly introduced keyword `ensure`. We call `ensure` on any fields of the object that we want to limit to within a certain range. In this case, we want to constrain the size of the shapes, so we add calls to `ensure MinSize(x.icon)` and `ensure maxSize(x.icon)`. `minSize` and `maxSize` are two other pre-defined constraints that Penrose provides. If you're curious, the documentation for these constraints can be found [here](https://penrose.github.io/penrose/modules/_contrib_constraints_.html#constrdict) \(scroll down to minSize, maxSize\). You can also see how Penrose implemented these constraints by clicking on the "Defined in" link.
 
-{% code title=".sty" %}
+{% code title="subset.sty" %}
 ```typescript
 forall Set x {
     x.icon = Circle {
@@ -96,9 +106,9 @@ forall Set x {
 ```
 {% endcode %}
 
-So putting it together, we have
+So putting it all together, we have:
 
-{% code title=".sty" %}
+{% code title="subset.sty" %}
 ```typescript
 forall Set A; Set B
 where IsSubset(A, B) {
@@ -116,13 +126,23 @@ forall Set x {
 ```
 {% endcode %}
 
+To compile our new code, we can run the same commands as last time, with one minor change. Since the files we are working with are in the `tutorial2` folder instead of the `tutorial1` folder, we have to change our-`<path-to-triple>`. So, we build as follows:
+
+* Open two terminals at the root of the Penrose repository.
+* Run `yarn start` from the first terminal window
+* Open your browser at `localhost:3000`
+* From the root of the Penrose repository, run:`npx roger watch <path-to-triple>/subset.sub <path-to-triple-repo>/subset.sty <path-to-triple>/setTheory.dsl`
+* Refresh your browser window!
+
 ## Exercises
 
-* Define a predicate `Intersecting` that takes in two sets, and outputs 2 circles that overlap.
+Complete the following exercises to practice implementing predicates in Penrose! As a reminder, you can find the documentation for all pre-defined constraints [here](https://penrose.github.io/penrose/modules/_contrib_constraints_.html#constrdict).
+
+* Define a predicate `Intersecting` that takes in two sets and outputs 2 circles that overlap.
 
 ![](.gitbook/assets/e1c1.png)
 
-* Define a predicate that is the opposite of `Intersecting` that takes in two sets, and outputs 2 circles that are disjoint.
+* Define a predicate that takes in two sets and outputs 2 circles that are disjoint.
 
 ![](.gitbook/assets/e1c2.png)
 
@@ -130,6 +150,6 @@ forall Set x {
 
 ## Take-aways
 
-* We use the keyword `predicate` to define relationship between objects.
+* We use the keyword `predicate` to define the relationship between objects.
 * We use the keyword `ensure` to define constraints on the diagram.
 

@@ -143,9 +143,40 @@ minSize: ([shapeType, props]: [string, any]) => {
 }
 ```
 
-Here we see several things in play. 
+If you have never used Typescript before, we are defining an [arrow function](https://www.tutorialsteacher.com/typescript/arrow-function). It takes two parameters, a `shapeType`, which is of type `string`, and `props`, which has type `any`. Generally speaking, function declarations will follow this pattern:
 
-* **Input:** The function takes in the shape, which is represented by a string of its shape name, `"Circle"` in this case, and a `prop` which contains the properties of the circle. 
+```typescript
+functionName: (param1: param1Type, param2: param2Type): returnType => {
+ /* function body */
+}
+```
+
+You can read more about function declarations in Typescript [here](https://www.typescriptlang.org/docs/handbook/2/functions.html).
+
+Going back to our `minSize` function, we see several things in play:
+
+* **Input:** The function takes in the shape, which is represented by a string of its name, `"Circle"` in this case, and a `prop` which is an Object containing the properties of the circle. All Shape objects that are passed into objective functions or constraints must have the type `[string, any]`. For example, this is Penrose's definition of a Circle object \(defined [here](https://github.com/penrose/penrose/blob/main/packages/core/src/renderer/ShapeDef.ts#L151)\). You can see that the required parameter types correspond to `shapeType` and `properties`.
+
+{% code title="ShapeDef.ts" %}
+```typescript
+export const circleDef: ShapeDef = {
+  shapeType: "Circle",
+  properties: {
+    center: ["VectorV", vectorSampler],
+    r: ["FloatV", widthSampler],
+    pathLength: ["FloatV", pathLengthSampler], // part of svg spec
+    strokeWidth: ["FloatV", strokeSampler],
+    style: ["StrV", () => constValue("StrV", "filled")],
+    strokeStyle: ["StrV", () => constValue("StrV", "solid")],
+    strokeColor: ["ColorV", colorSampler],
+    color: ["ColorV", colorSampler],
+    name: ["StrV", () => constValue("StrV", "defaultCircle")],
+  },
+  positionalProps: ["center"],
+};
+```
+{% endcode %}
+
 * **Numbers:** Instead of directly using constant numbers like `20`, we have to return `constOf(limit)` in order to pass it as a valid input for the autodiff function.
 * **Operations:** Instead of using the subtraction operator `-` like we normally do, we have to use the autodiff function `sub` .
 * **Accessing the Shape Property:** We access the shape's property value by `shapeName.propertyName.contents` , where `propertyName = r` for radius in this case. 
@@ -160,7 +191,7 @@ maxSize: ([shapeType, props]: [string, any]) => {
 }
 ```
 
-The function `maxSize` is very similar to `minSize` with the addition of a global variable `canvasSize` which indicates the size of the canvas. We use this to limit our circle's radius. It is divided by `6.0` so that the circle does not cover the entire canvas. You can feel free to play around with the amount you divide by, but `6.0` has worked pretty well.
+The function `maxSize` is very similar to `minSize` with the addition of a global variable `canvasSize` which indicates the size of the canvas. We use this to limit our circle's radius. It is divided by `6.0` so that the circle does not cover the entire canvas. You can feel free to play around with the amount you divide by, but `6.0` has worked pretty well. If you're curious about how `minSize` and `maxSize` are implemented in Penrose, you can find the code [here](https://github.com/penrose/penrose/blob/dbf710646bcaad9f0e3142388ae4759ca6b3a740/packages/core/src/contrib/Constraints.ts#L262).
 
 ## Objectives Example: Circle Repel
 
@@ -169,7 +200,7 @@ Unlike constraints, which are binary in that they are either satisfied \(`<=0`\)
 Now we look at an objective that makes two circles repel, encouraging the two circles to stay far away from each other. 
 
 ```typescript
-repel: ([t1, s1]: [string, any], [t2, s2]: [string, any], weight = 10.0) => {
+repel: ([t1, s1]: [string, any], [t2, s2]: [string, any]) => {
     const repelWeight = 10e6;
     let res = inverse(ops.vdistsq(s1.center.contents, s2.center.contents));
     return mul(res, constOf(repelWeight));

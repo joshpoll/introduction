@@ -32,58 +32,17 @@ There are comments in the starter code that document each block briefly. In this
 
 For more in-depth explanations on the starter code, we prepared a separate document [here](https://github.com/penrose/tutorials/blob/main/supplementary/tutorial3/walkthrough.md).
 
-## 📄 Domain
+## Task 1: Vectors In Vector Space
 
-We will write our first function in Penrose together 💫!
+Good news! Our Domain and Substance programs do not need to be altered for this task. Let's start by taking a look at the Style program.
 
-In Penrose, functions are declarative, just like everything else. Functions allow us to use defined elements to create new elements. They only have inputs and outputs. We will add a new line to our `.dsl` file that defines a function called `addV`, which adds two vectors:
-
-```typescript
-/* new line in .dsl file */
-function addV: Vector * Vector -> Vector
-```
-
-The syntax for functions is similar to defining elementary objects and predicates. 
-
-* As usual, we begin with the type keyword, `function` in this case. 
-* Then we write the function name \(`addV`\) followed by a colon `:`. 
-* Next, we define the input types. We can add multiple input elements by connecting them with `*`. These are the types of the existing objects that will be used
-* Lastly, we write `->` followed by the output type. 
-
-## 📄 Substance
-
-Penrose is a purely [functional language](https://www.tutorialspoint.com/functional_programming/functional_programming_introduction.htm). So, when we have `y = f(x)`, it's read like `y is defined as f(x)`.
-
-The syntax for composing a new object using a function in Penrose involves a new operator `:=`, which is the assignment operator. We write `y := f(x)` to define `y` as `f(x)`. 
-
-The existing code in our sample file already defines the vectors `v` and `w`, so all we need to do is define our resulting vector, `u`. We can do this by writing `u := addV(v, w)`. We also want to make sure that `u` is in our original vector space \(denoted `U`\) along with our existing vectors `v` and `w`. To do this, we can make use of the predicate `In` \(which was defined in the starter code\) by writing `In(u, U)`.
-
-```typescript
-/* new lines in .sub file ******/
-Vector u := addV(v, w)
-In(u, U)
-/* autolabel on the last line */
-AutoLabel All
-```
-
-## 📄 Style
-
-Now the real fun starts🖌️. But before that, let's take a moment to understand why Penrose is the way it is.
+### 📄 Style
 
 > The goal of Penrose is to visualize mathematical relationships.
 
-These relationships can be represented in many different ways. Therefore, Penrose does not include any built-in numeric types. For example, when we define a `Vector`, we don't assign it concrete values \(e.g. we don't write `Vector v := (1,2)`\). Instead, we simply declare the `Vector` and associate it with a `VectorSpace` using the `In` predicate. 
+These visual relationships can be represented in many different ways. Therefore, Penrose does not include any built-in numeric types. For example, when we define a `Vector`, we don't assign it concrete values \(e.g. we don't write `Vector v := (1,2)`\). Instead, we simply declare the `Vector` and associate it with a `VectorSpace` using the `In` predicate. 
 
 It's a good rule of thumb to **NOT** touch concrete numbers until we get into the `.sty` file.
-
-There are two tasks we need to do in our style program on top of the starter code:
-
-* [Task 1](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial-p3.md#task-1-vectors-in-vector-space): Draw vectors in a vector space
-* [Task 2](https://github.com/penrose/penrose/blob/docs-edit/tutorial/tutorial-p3.md#task-2-vector-as-sum-of-two-existing-vectors): Draw vectors that are the sum of two existing vectors 
-
-Task 1 involves more lines of code but it is pretty similar to what we covered in previous tutorials, and Task 2 covers how to do simple computations for objects that are composed from existing objects.
-
-### Task 1: Vectors In Vector Space
 
 Every vector exists in a vector space, and we typically draw them from the origin of that space. In the given `.dsl` file, you will find a defined predicate called `In` that takes in a `Vector` and a `VectorSpace`. The way we work with `In` is very similar to the `isSubset` predicate we have worked with in tutorial 2.
 
@@ -116,7 +75,7 @@ u.shape = Arrow {
 
 Note that the field name `shape` could be replaced by anything you want, we just need to assign the pre-defined Penrose `Arrow` object to some field \(remember in tutorial 1 we used `.icon`\). Here we are simply defining some properties of the `Arrow` shape object.
 
-🗒️ Side note: **3.0 is not the same as 3**. This is important when you need a **float** versus an **int**. We often write **3.**, thus ignoring the zero after the decimal point for convenience.
+🗒️ Side note: **3.0 is not the same as 3**. This is important when you need a **float** versus an **int**. We often write **3.**, thus ignoring the zero after the decimal point for convenience. If you want to see what type each field for a given Shape object expects, you can refer to the source code for `packages/core/src/renderer/ShapeDef.ts`. For example, the specification for an Arrow, aka `arrowDef` in the code, can be found [here](https://github.com/penrose/penrose/blob/dbf710646bcaad9f0e3142388ae4759ca6b3a740/packages/core/src/renderer/ShapeDef.ts#L389).
 
 Lastly, we need a field to write the variable name of our vector in the diagram.
 
@@ -149,7 +108,47 @@ layer u.text above U.yAxis
 
 ![Your new Penrose diagram should look something like this!](https://github.com/penrose/penrose/raw/docs-edit/assets/tutorial/part3/2vectors_wg.png)
 
-### Task 2: Vector As Sum of Two Existing Vectors
+## Task 2: Vector As Sum of Two Existing Vectors
+
+### 📄 Domain
+
+We will write our first function in Penrose together 💫!
+
+```typescript
+/* new line in .dsl file */
+function addV: Vector * Vector -> Vector
+```
+
+In Penrose, functions are declarative, just like everything else. Functions allow us to use defined elements to create new elements. They only have inputs and outputs. We will add a new line to our `.dsl` file that defines a function called `addV`, which adds two vectors:
+
+The syntax for functions is similar to defining elementary objects and predicates. 
+
+* As usual, we begin with the type keyword, `function` in this case. 
+* Then we write the function name \(`addV`\) followed by a colon `:`. 
+* Next, we define the input types. We can add multiple input elements by connecting them with `*`. These are the types of the existing objects that will be used
+* Lastly, we write `->` followed by the output type. 
+
+## 📄 Substance
+
+Penrose is a purely [functional language](https://www.tutorialspoint.com/functional_programming/functional_programming_introduction.htm). So, when we have `y = f(x)`, it's read like `y is defined as f(x)`.
+
+The syntax for composing a new object using a function in Penrose involves a new operator `:=`, which is the assignment operator. We write `y := f(x)` to define `y` as `f(x)`. 
+
+The existing code in our sample file already defines the vectors `v` and `w`, so all we need to do is define our resulting vector, `u`. We can do this by writing `u := addV(v, w)`. We also want to make sure that `u` is in our original vector space \(denoted `U`\) along with our existing vectors `v` and `w`. To do this, we can make use of the predicate `In` \(which was defined in the starter code\) by writing `In(u, U)`.
+
+```typescript
+/* new lines in .sub file ******/
+Vector u := addV(v, w)
+In(u, U)
+/* autolabel on the last line */
+AutoLabel All
+```
+
+## 📄 Style
+
+Though we have declared our function `addV` in the Domain program and defined that we want our `Vector u` to be the result of `addV(v, w)` in our Substance program, Penrose will not know how to visually represent the relationship `u := addV(v, w)` unless we make some changes to our Style program. If you re-compile your triple in its current state, you'll see that it is plotting 3 vectors arbitrarily, like this:
+
+![](.gitbook/assets/screenshot-from-2021-06-04-13-13-38.png)
 
 Again, we start with writing a selector. We have a bit more work to do, since we have 3 vectors and 1 vector space involved. We also need to make sure that `u,v,w` are all in the same vector space. Therefore, our selector will be the following:
 
@@ -180,7 +179,11 @@ This is easier than you expected, right? You're all done with this tutorial! Tak
 
 _FYI: All the sample goal diagrams are only a single sampling of many possible variations._
 
-We follow the convention of `u` being the resultant vector, and use `v, w` for input vectors.
+We follow the convention of `u` being the resultant vector, and use `v, w` for input vectors. As a reminder,  documentation for the pre-defined shapes that are available in Penrose can be found [here](https://github.com/penrose/penrose/wiki/Shape-library).
+
+{% hint style="info" %}
+As of 6/3/21, at times there may be some inconsistencies between the Shape documentation and the current functionality provided by Penrose. For the most up-to-date reference, check out the properties listed for each shape in the source code [here](https://github.com/penrose/penrose/blob/dbf710646bcaad9f0e3142388ae4759ca6b3a740/packages/core/src/renderer/ShapeDef.ts#L151).
+{% endhint %}
 
 * **Exercise 1:** Create a new function that computes vector subtraction, and draws the difference vector, i.e. `u = v - w`.
 
