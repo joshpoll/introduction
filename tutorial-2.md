@@ -115,6 +115,7 @@ where IsSubset(A, B) {
     ensure smallerThan(A.icon, B.icon)
     ensure contains(A.icon, B.icon, 5.0)
     A.icon above B.icon
+}
     
 forall Set x {
     x.icon = Circle {
